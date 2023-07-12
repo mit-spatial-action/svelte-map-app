@@ -1,0 +1,33 @@
+---
+
+---
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+<div id="map"></div>
+<script>
+    mapboxgl.accessToken = import.meta.env.PUBLIC_MAPBOX_TOKEN;
+    const map = new mapboxgl.Map({
+        container: 'map',
+        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+        style: 'mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy',
+        center: [-125, 80],
+        zoom: 1.8,
+        bearing: 0,
+        projection: 'globe' // starting projection
+    });
+    map.on('style.load', () => {
+        map.setFog({
+            'color': 'rgba(255, 255, 255, 0.3)',
+            'high-color': '#eb0289',
+            'horizon-blend': 0.015, // Exaggerate atmosphere (default is .1),
+            'space-color': '#feeac3'//, 
+            // 'star-intensity': 1
+        }); // Set the default atmosphere style
+        map.flyTo({
+            center: [-120, 42],
+            zoom: 3.2,
+            duration: 6000,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    });
+</script>

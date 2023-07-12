@@ -1,0 +1,64 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const meta = {
+	name: "Siting Solar",
+	github: "",
+	url: ""
+};
+
+const organization = {
+	name: "Resonant Energy",
+	website: "https://resonant.energy"
+};
+
+const author = {
+	name: "Eric Robsky Huntley, PhD",
+	email: "ehuntley@mit.edu"
+};
+
+const pageName = Astro.props;
+
+const keywords = ["test1", "test2"];
+
+const published = false;
+
+const skillColor = "magenta";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" /><link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500913866446-5OE5FYG4545FJGUF00IE/favicon.ico?format=100w">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="generator" content={Astro.generator} />
+		<title>{meta.name}</title>
+		<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+		<script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+	</head>
+	<style define:vars={{skillColor}}>
+		h1 {
+			color: purple;
+			font-size: 4rem;
+		}
+		.skill {
+			color: green;
+			color: var(--skillColor);
+			font-weight: bold;
+		}
+	</style>
+	<body>
+		<!-- <Header /> -->
+		<!-- <h1>{meta.name}</h1> -->
+		<!-- {published && <ul>
+			{keywords.map((s) => <li class="skill">{s}</li>)}
+		</ul>} -->
+    	<Header />
+        <slot />
+		<!-- <Footer /> -->
+		<script>
+			import '../scripts/menu.js';
+		</script>
+	</body>
+</html>
