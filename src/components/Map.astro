@@ -16,6 +16,12 @@
         projection: 'globe' // starting projection
     });
     map.on('style.load', () => {
+        map.addControl(
+            new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            })
+        );
         map.setFog({
             'color': 'rgba(255, 255, 255, 0.3)',
             'high-color': '#eb0289',
