@@ -1,8 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Map from '../components/Map.astro';
+import Spinner from '../components/Spinner.astro';
 const pageName = "Map";
 ---
 <BaseLayout pageName={pageName}>
+    <Spinner />
     <Map />
 </BaseLayout>
