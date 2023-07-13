@@ -1,12 +1,9 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Map from '../components/Map.svelte';
-import FixedLogoPanel from '../components/FixedLogoPanel.svelte';
-import Loader from '../components/Loader.svelte';
+import MapGeocoder from '../components/MapGeocoder.svelte';
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
-    <!-- <Loader/> -->
-    <Map client:load lat={42} lon={-120} init_zoom={1.8} final_zoom={3}></Map>
-    <!-- <FixedLogoPanel /> -->
+    <Map client:load lat={42} lng={-120} init_zoom={1.8} final_zoom={3}/>
 </BaseLayout>
