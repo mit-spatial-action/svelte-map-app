@@ -1,7 +1,7 @@
 <script>
   import data from '../instance.json'
-  export let duration = 1;
-  export let border = 4;
+  export let duration = 1.2;
+  export let border = 5;
   export let color = data.accentColor
 </script>
 
