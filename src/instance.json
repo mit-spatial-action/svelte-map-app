@@ -5,18 +5,22 @@
     "authors": [{
         "name": "Eric Robsky Huntley, PhD",
         "affiliation": "MIT DUSP",
-        "email": "ehuntley@mit.edu",
+        "location": "Cambridge, MA",
         "url": "https://dusp.mit.edu/people/eric-robsky-huntley"
     }],
     "orgs": [{
         "name": "Resonant Energy",
         "url": "https://resonant.Energy",
-        "logo": "src/media/resonant.png"
-    }, {
-        "name": "Resonant Energy",
-        "url": "https://resonant.Energy",
+        "location": "Boston, MA",
         "logo": "src/media/resonant.png"
     }],
+    "pages": {
+        "Home": "/",
+        "Map": "map",
+        "Documentation": "documentation",
+        "Contact": "contact",
+        "About": "about"
+    },
     "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
     "primaryColor": "#fbaf13ff",
     "accentColor": "#eb008bff",

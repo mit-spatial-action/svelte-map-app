@@ -1,0 +1,27 @@
+---
+import CollaboratorsList from '../components/CollaboratorsList.svelte';
+import WelcomeButton from '../components/WelcomeButton.svelte';
+import BaseLayout from './BaseLayout.astro';
+import data from '../instance.json'
+const { frontmatter } = Astro.props;
+---
+<BaseLayout pageName={frontmatter.title}>
+    <section class="hero is-fullheight-with-navbar is-warning">
+        <div class="hero-body">
+            <div class="container">
+                <div class="block">
+                    <h1 class = "title">
+                        <slot />
+                    </h1>
+                </div>
+                <div class="block">
+                    <WelcomeButton />
+                </div>
+                <div class="block">
+                    <CollaboratorsList authors={data.authors} orgs = {data.orgs}/>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

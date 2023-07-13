@@ -1,7 +1,7 @@
 ---
 import "../../node_modules/bulma/css/bulma.css";
 import '../styles/global.css';
-import FixedLogo from '../components/FixedLogoPanel.svelte';
+import Navbar from '../components/Navbar.svelte';
 
 import { SEO } from "astro-seo";
 // const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -29,7 +29,7 @@ import data from '../instance.json'
 		/>
 	</head>
 	<body>
-		<FixedLogo />
+		<Navbar client:load pages={data.pages}/>
         <slot />
 	</body>
 </html>
