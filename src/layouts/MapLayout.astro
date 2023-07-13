@@ -1,10 +1,10 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Map from '../components/Map.svelte';
-import Spinner from '../components/Spinner.astro';
+import Spinner from '../components/Spinner.svelte';
 const pageName = "Map";
 ---
 <BaseLayout pageName={pageName}>
-    <!-- <Spinner /> -->
-    <Map client:load lat={42} lon={-120} init_zoom={1.8} final_zoom={3} />
+    <Spinner duration={1}/>
+    <!-- <Map client:load lat={42} lon={-120} init_zoom={1.8} final_zoom={3} /> -->
 </BaseLayout>
