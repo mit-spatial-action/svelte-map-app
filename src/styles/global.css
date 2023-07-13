@@ -77,10 +77,6 @@ hamburger {
     display: unset;
 }
 
-
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
-
-
 @media screen and (min-width: 636px) {
     .nav-links {
         margin-left: 5em;
