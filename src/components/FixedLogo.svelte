@@ -1,0 +1,28 @@
+<script>
+    import data from '../instance.json'
+    export let src = data.org.logo
+    export let backgroundColor = data.backgroundColor
+    export let borderColor = data.primaryColor
+    export let shadowColor = data.accentColor
+    export let width = 10
+</script>
+
+<style>
+    .logo {
+        position: fixed;
+        bottom: 0.5em;
+        left: 0.5em;
+        z-index: 500;
+        padding: 0.75em;
+        background-color: var(--background);
+        border: 2px solid var(--border);
+        box-shadow: var(--shadow) 0.125em -0.125em 0.25em;
+    }
+</style>
+
+<div class="logo" style="
+    --background: {backgroundColor}; 
+    --border: {borderColor};
+    --shadow: {shadowColor};">
+    <img {src} style="width: {width}em;" alt="{data.org.name} Logo" />
+</div>

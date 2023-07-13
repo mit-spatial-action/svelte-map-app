@@ -1,26 +1,13 @@
 ---
 import "../../node_modules/bulma/css/bulma.css";
 import '../styles/global.css';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
+import FixedLogo from '../components/FixedLogo.svelte';
 
-const meta = {
-	name: "Siting Solar",
-	github: "",
-	url: ""
-};
+import { SEO } from "astro-seo";
+// const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
-const organization = {
-	name: "Resonant Energy",
-	website: "https://resonant.energy"
-};
-
-const author = {
-	name: "Eric Robsky Huntley, PhD",
-	email: "ehuntley@mit.edu"
-};
-
-const keywords = ["test1", "test2"];
+import data from '../instance.json'
 
 const published = false;
 
@@ -32,7 +19,19 @@ const skillColor = "magenta";
 		<meta charset="utf-8" /><link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500913866446-5OE5FYG4545FJGUF00IE/favicon.ico?format=100w">
 		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="generator" content={Astro.generator} />
-		<title>{meta.name} | {Astro.props.pageName}</title>
+		<title>{data.appTitle} | {Astro.props.pageName}</title>
+		<SEO
+			title = {data.appTitle}
+			description = {data.appDescription}
+			openGraph={{
+				basic: {
+				url: "",
+				title: "",
+				type: "",
+				image: ""
+			}}
+		}
+		/>
 	</head>
 	<body>
 		<!-- <Header /> -->
@@ -40,7 +39,9 @@ const skillColor = "magenta";
 		<!-- {published && <ul>
 			{keywords.map((s) => <li class="skill">{s}</li>)}
 		</ul>} -->
-    	<Header />
+		<FixedLogo />
+		<!-- <Navigation /> -->
+    	<!-- <Header /> -->
         <slot />
 		<!-- <Footer /> -->
 		<script>

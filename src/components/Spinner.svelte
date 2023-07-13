@@ -1,11 +1,14 @@
 <script>
+  import data from '../instance.json'
   export let duration = 1;
   export let border = 4;
+  export let color = data.accentColor
 </script>
 
 <style>
   .ripple,
   .ripple div {
+    z-index: 1000;
     box-sizing: border-box;
   }
   .ripple {
@@ -16,7 +19,7 @@
   }
   .ripple div {
     position: absolute;
-    border: calc(var(--border) * 1px) solid currentColor;
+    border: calc(var(--border) * 1px) solid var(--color);
     opacity: 1;
     border-radius: 50%;
     animation: ripple calc(var(--duration) * 1s) cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -54,10 +57,21 @@
 </style>
 
 <div class="ripple">
-  <div style="--duration: {duration}; --border: {border};">
+  <div style="
+    --color: {color}; 
+    --duration: {duration}; 
+    --border: {border};">
   </div>
-  <div style="--duration: {duration}; --border: {border}; animation-delay: -{duration/2}s;">
+  <div style="
+    --color: {color}; 
+    --duration: {duration}; 
+    --border: {border}; 
+    animation-delay: -{duration/2}s;">
   </div>
-  <div style="--duration: {duration}; --border: {border}; animation-delay: -{duration/4}s;">
+  <div style="
+    --color: {color}; 
+    --duration: {duration}; 
+    --border: {border}; 
+    animation-delay: -{duration/4}s;">
   </div>
 </div>

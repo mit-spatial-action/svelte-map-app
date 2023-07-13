@@ -1,0 +1,14 @@
+{
+    "appTitle": "Siting Solar",
+    "appDescription": "",
+    "appType": "",
+    "org": {
+        "name": "Resonant Energy",
+        "website": "https://resonant.Energy",
+        "logo": "src/media/resonant.png"
+    },
+    "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
+    "primaryColor": "#fbaf13ff",
+    "accentColor": "#eb008bff",
+    "backgroundColor": "#ffffffff"
+}
