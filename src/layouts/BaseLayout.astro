@@ -1,4 +1,5 @@
 ---
+import "../../node_modules/bulma/css/bulma.css";
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -19,8 +20,6 @@ const author = {
 	email: "ehuntley@mit.edu"
 };
 
-const pageName = Astro.props;
-
 const keywords = ["test1", "test2"];
 
 const published = false;
@@ -33,7 +32,7 @@ const skillColor = "magenta";
 		<meta charset="utf-8" /><link rel="shortcut icon" type="image/x-icon" href="https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500913866446-5OE5FYG4545FJGUF00IE/favicon.ico?format=100w">
 		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 		<meta name="generator" content={Astro.generator} />
-		<title>{meta.name}</title>
+		<title>{meta.name} | {Astro.props.pageName}</title>
 	</head>
 	<body>
 		<!-- <Header /> -->
