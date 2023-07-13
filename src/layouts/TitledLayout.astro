@@ -3,7 +3,15 @@ import BaseLayout from './BaseLayout.astro';
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
-    <h1>{frontmatter.title}</h1>
-    <p><em>{frontmatter.description}</em></p>
-    <slot />
+    <div class = "section is-medium">
+        <div class = "container">
+            <h1 class="title">{frontmatter.title}</h1>
+            <p><em>{frontmatter.description}</em></p>
+        </div>
+    </div>
+    <div class = "section">
+        <div class = "container">
+            <slot />
+        </div>
+    </div>
 </BaseLayout>

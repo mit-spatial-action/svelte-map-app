@@ -2,11 +2,21 @@
     "appTitle": "Siting Solar",
     "appDescription": "",
     "appType": "",
-    "org": {
+    "authors": [{
+        "name": "Eric Robsky Huntley, PhD",
+        "affiliation": "MIT DUSP",
+        "email": "ehuntley@mit.edu",
+        "url": "https://dusp.mit.edu/people/eric-robsky-huntley"
+    }],
+    "orgs": [{
         "name": "Resonant Energy",
-        "website": "https://resonant.Energy",
+        "url": "https://resonant.Energy",
         "logo": "src/media/resonant.png"
-    },
+    }, {
+        "name": "Resonant Energy",
+        "url": "https://resonant.Energy",
+        "logo": "src/media/resonant.png"
+    }],
     "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
     "primaryColor": "#fbaf13ff",
     "accentColor": "#eb008bff",
