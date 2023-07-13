@@ -6,8 +6,8 @@
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
     
     setContext(key, {
-		getMap: () => map
-	});
+        getMap: () => map
+    });
 
     export let lat;
     export let lon;
@@ -18,7 +18,7 @@
     let map;
 
     onMount(() => {
-		map = new mapbox.Map({
+        map = new mapbox.Map({
             container: container,
             // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
             style: 'mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy',
@@ -26,7 +26,7 @@
             zoom: init_zoom,
             bearing: 0,
             projection: 'globe' // starting projection
-		});
+        });
         map.on('style.load', () => {
             map.addControl(
                 new MapboxGeocoder({
@@ -53,13 +53,13 @@
                 essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
         });
-	});
+    });
 
     onDestroy(() => {
-		if (map) {
-            map.remove()
+        if (map) {
+             map.remove()
         };
-	});
+    });
 </script>
 
 <div bind:this={container}>
