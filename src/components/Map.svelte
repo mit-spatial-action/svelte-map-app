@@ -9,21 +9,48 @@
         getMap: () => map
     });
 
-    export let lat;
-    export let lng;
-    export let init_zoom;
-    export let final_zoom;
+    export let lngLat;
+    export let init_zoom=1.8;
+    export let final_zoom=3;
+    export let init_zoom_duration=6000;
 
     let container;
     let map;
     let marker;
+
+    function removeMarker() {
+        if(typeof marker !== 'undefined') {
+            marker.remove();
+        }
+    }
+    function createMarker(lngLat) {
+        marker = new mapbox.Marker()
+            .setLngLat(lngLat)
+        marker.addTo(map);
+    }
+
+    function flyToMarker(lngLat, min_zoom = 10){
+        let zoom = (map.getZoom() > min_zoom) ? map.getZoom() : min_zoom;
+        map.flyTo({
+            center: lngLat,
+            zoom: zoom,
+            duration: 2000,
+            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+        });
+    }
+
+    function markerFlow(lngLat){
+        removeMarker();
+        createMarker(lngLat);
+        flyToMarker(lngLat);
+    }
 
     onMount(() => {
         map = new mapbox.Map({
             container: container,
             // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
             style: 'mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy',
-            center: [lng - 10, lat - 10],
+            center: lngLat,
             zoom: init_zoom,
             bearing: 0,
             projection: 'globe' // starting projection
@@ -32,27 +59,22 @@
             accessToken: mapbox.accessToken,
             mapboxgl: mapbox
         });
-        document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+        geocoder.addTo('#geocoder');
         geocoder.on('result', e => {
-            lat = e.result.geometry.coordinates[1]
-            lng = e.result.geometry.coordinates[0]
+            lngLat = e.result.geometry.coordinates;
+            markerFlow(lngLat);
+        });
+        geocoder.on('clear', () => {
+            removeMarker(marker);
         });
         map.on('style.load', () => {
             map.on('click', (e) => {
-                if(typeof marker !== 'undefined') {
-                    marker.remove();
-                }
-                marker = new mapbox.Marker()
-                    .setLngLat(e.lngLat)
-                marker.addTo(map);
-                map.flyTo({
-                    center: e.lngLat,
-                    zoom: 10,
-                    duration: 2000,
-                    essential: true // this animation is considered essential with respect to prefers-reduced-motion
-                });
-                lat = e.lngLat.lat;
-                lng = e.lngLat.lng;
+                // with thanks to...
+                // https://stackoverflow.com/questions/56018065/how-to-clear-the-mapbox-geocoder
+                geocoder.clear();
+                document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
+                lngLat = e.lngLat;
+                markerFlow(lngLat);
             });
             map.setFog({
                 'color': 'rgba(255, 255, 255, 0.3)',
@@ -62,9 +84,9 @@
                 // 'star-intensity': 1
             }); // Set the default atmosphere style
             map.flyTo({
-                center: [-120, 42],
+                center: lngLat,
                 zoom: final_zoom,
-                duration: 6000,
+                duration: init_zoom_duration,
                 essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
         });
@@ -76,20 +98,12 @@
         };
     });
 </script>
-<div class="columns">
-    <div class="column is-one-quarter">
-        <div id="map-interface" class="card">
-            <div class="card-header">
-                <h1 class="card-header-title">test</h1>
-            </div>
-            <div class="card-content">
-                <div class="content">
-                    <div id="geocoder" class="block"/>
-                    <div class="block">
-                        {lat}
-                        {lng}
-                    </div>
-                </div>
+<div id="info-interface" class="card">
+    <div class="card-content">
+        <div class="content">
+            <div id="geocoder" class="block"/>
+            <div class="block">
+                {lngLat}
             </div>
         </div>
     </div>
@@ -109,7 +123,11 @@
 		height: 100%;
 	}
 
-    #map-interface {
-        z-index:1000;
+    #info-interface {
+        position: absolute;
+        z-index: 50;
+        left: 0px;
+        bottom: 0px;
+        min-height:50%;
     }
 </style>

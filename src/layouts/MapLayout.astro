@@ -5,5 +5,5 @@ import MapGeocoder from '../components/MapGeocoder.svelte';
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
-    <Map client:load lat={42} lng={-120} init_zoom={1.8} final_zoom={3}/>
+    <Map client:load lngLat={[-120, 42]}/>
 </BaseLayout>
