@@ -25,5 +25,8 @@
     "primaryColor": "#fbaf13ff",
     "accentColor": "#eb008bff",
     "backgroundColor": "#ffffffff",
-    "mapboxStyle": "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy"
+    "mapProps": {
+        "style": "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy",
+        "center": [-120, 42]
+    }
 }
