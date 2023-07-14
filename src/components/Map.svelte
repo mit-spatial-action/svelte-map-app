@@ -10,7 +10,7 @@
     });
 
     export let lngLat;
-    export let mapboxStyle;
+    export let mapboxStyle='mapbox://styles/mapbox/satellite-v9';
     export let initZoom=1.8;
     export let finalZoom=3;
     export let resultZoom=10;
@@ -26,13 +26,13 @@
             marker.remove();
         }
     }
-    function createMarker(lngLat) {
+    function createMarker() {
         marker = new mapbox.Marker()
             .setLngLat(lngLat)
         marker.addTo(map);
     }
 
-    function flyToMarker(lngLat){
+    function flyToMarker(){
         let zoom = (map.getZoom() > resultZoom) ? map.getZoom() : resultZoom;
         map.flyTo({
             center: lngLat,
@@ -42,10 +42,10 @@
         });
     }
 
-    function markerFlow(lngLat){
+    function removeCreateFly(){
         removeMarker();
-        createMarker(lngLat);
-        flyToMarker(lngLat);
+        createMarker();
+        flyToMarker();
     }
 
     onMount(() => {
@@ -58,26 +58,26 @@
             bearing: 0,
             projection: 'globe' // starting projection
         });
-        const geocoder = new MapboxGeocoder({
-            accessToken: mapbox.accessToken,
-            mapboxgl: mapbox
-        });
-        geocoder.addTo('#geocoder');
-        geocoder.on('result', e => {
-            lngLat = e.result.geometry.coordinates;
-            markerFlow(lngLat);
-        });
-        geocoder.on('clear', () => {
-            removeMarker(marker);
-        });
         map.on('style.load', () => {
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapbox.accessToken,
+                mapboxgl: mapbox
+            });
+            geocoder.addTo('#geocoder');
+            geocoder.on('result', e => {
+                lngLat = e.result.geometry.coordinates;
+                removeCreateFly();
+            });
+            geocoder.on('clear', () => {
+                removeMarker(marker);
+            });
             map.on('click', (e) => {
                 // with thanks to...
                 // https://stackoverflow.com/questions/56018065/how-to-clear-the-mapbox-geocoder
                 geocoder.clear();
                 document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
                 lngLat = e.lngLat;
-                markerFlow(lngLat);
+                removeCreateFly();
             });
             map.setFog({
                 'color': 'rgba(255, 255, 255, 0.3)',
