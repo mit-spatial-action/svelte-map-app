@@ -6,16 +6,17 @@
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
     
     setContext(key, {
-        getMap: () => map
+        getMap: () => map,
+        getLngLat: () => lngLat
     });
 
     export let lngLat;
+    export let projection='globe';
     export let mapboxStyle='mapbox://styles/mapbox/satellite-v9';
-    export let initZoom=1.8;
-    export let finalZoom=3;
+    export let initZoom=[1.8, 3];
+    export let initZoomDur=6000;
     export let resultZoom=10;
     export let resultFlySpeed=2000;
-    export let initZoomDur=6000;
 
     let container;
     let map;
@@ -38,7 +39,7 @@
             center: lngLat,
             zoom: zoom,
             duration: resultFlySpeed,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            essential: true
         });
     }
 
@@ -51,12 +52,11 @@
     onMount(() => {
         map = new mapbox.Map({
             container: container,
-            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
             style: mapboxStyle,
             center: lngLat,
-            zoom: initZoom,
+            zoom: (initZoom.length === 2) ? initZoom[0] : initZoom,
             bearing: 0,
-            projection: 'globe' // starting projection
+            projection: projection
         });
         map.on('style.load', () => {
             const geocoder = new MapboxGeocoder({
@@ -86,12 +86,14 @@
                 'space-color': '#feeac3'//, 
                 // 'star-intensity': 1
             }); // Set the default atmosphere style
-            map.flyTo({
-                center: lngLat,
-                zoom: finalZoom,
-                duration: initZoomDur,
-                essential: true // this animation is considered essential with respect to prefers-reduced-motion
-            });
+            if (initZoom.length === 2) {
+                map.flyTo({
+                    center: lngLat,
+                    zoom: initZoom[1],
+                    duration: initZoomDur,
+                    essential: true // this animation is considered essential with respect to prefers-reduced-motion
+                });
+            }
         });
     });
 
