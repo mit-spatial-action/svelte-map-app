@@ -1,5 +1,6 @@
 <script>
 	import { loadingState } from '../scripts/stores.js';
+    import { fade, fly } from 'svelte/transition';
     export let duration = 1.2;
     export let border = 5;
     export let color = "red";
@@ -11,8 +12,8 @@
 </script>
 
 {#if loading}
-<div class="wrapper">
-    <div class="ripple">
+<div transition:fade class="wrapper">
+    <div transition:fly={{ y: 200, duration: 500 }} class="ripple">
         <div style="
         --color: {color}; 
         --duration: {duration}; 
