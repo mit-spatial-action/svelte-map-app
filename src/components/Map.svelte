@@ -10,9 +10,12 @@
     });
 
     export let lngLat;
-    export let init_zoom=1.8;
-    export let final_zoom=3;
-    export let init_zoom_duration=6000;
+    export let mapboxStyle;
+    export let initZoom=1.8;
+    export let finalZoom=3;
+    export let resultZoom=10;
+    export let resultFlySpeed=2000;
+    export let initZoomDur=6000;
 
     let container;
     let map;
@@ -29,12 +32,12 @@
         marker.addTo(map);
     }
 
-    function flyToMarker(lngLat, min_zoom = 10){
-        let zoom = (map.getZoom() > min_zoom) ? map.getZoom() : min_zoom;
+    function flyToMarker(lngLat){
+        let zoom = (map.getZoom() > resultZoom) ? map.getZoom() : resultZoom;
         map.flyTo({
             center: lngLat,
             zoom: zoom,
-            duration: 2000,
+            duration: resultFlySpeed,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
         });
     }
@@ -49,9 +52,9 @@
         map = new mapbox.Map({
             container: container,
             // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-            style: 'mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy',
+            style: mapboxStyle,
             center: lngLat,
-            zoom: init_zoom,
+            zoom: initZoom,
             bearing: 0,
             projection: 'globe' // starting projection
         });
@@ -85,8 +88,8 @@
             }); // Set the default atmosphere style
             map.flyTo({
                 center: lngLat,
-                zoom: final_zoom,
-                duration: init_zoom_duration,
+                zoom: finalZoom,
+                duration: initZoomDur,
                 essential: true // this animation is considered essential with respect to prefers-reduced-motion
             });
         });

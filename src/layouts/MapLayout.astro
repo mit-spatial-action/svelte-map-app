@@ -1,9 +1,9 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Map from '../components/Map.svelte';
-import MapGeocoder from '../components/MapGeocoder.svelte';
+import data from '../instance.json'
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
-    <Map client:load lngLat={[-120, 42]}/>
+    <Map client:load lngLat={[-120, 42]} mapboxStyle={data.mapboxStyle}/>
 </BaseLayout>
