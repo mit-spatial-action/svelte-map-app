@@ -1,13 +1,10 @@
 <script>
-    import { onDestroy, setContext, onMount } from 'svelte';
-	import { mapbox, key } from '../scripts/mapbox.js';
-    import { writable } from 'svelte/store';
+    import { onDestroy, onMount } from 'svelte';
+	import { mapbox, key } from '../scripts/mapbox';
+	import { selectedLocation, loadingState } from '../scripts/stores.js';
     import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
     import 'mapbox-gl/dist/mapbox-gl.css';
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-    
-    const selectedLocation = writable();
-
     export let projection='globe';
     export let style='mapbox://styles/mapbox/satellite-v9';
     export let init={
@@ -22,7 +19,6 @@
     let map;
 
     let location;
-
     selectedLocation.subscribe((data) => {
         location = data;
     });
@@ -32,7 +28,7 @@
             location.marker.remove();
         }
     }
-    function createMarker(lngLat, remove = true) {
+    function updateLocation(lngLat, remove = true) {
         (remove) ? removeMarker() : null;
         selectedLocation.update(() => {
             return {
@@ -56,9 +52,43 @@
     }
 
     function makeAddFly(lngLat, remove = true){
-        createMarker(lngLat, remove = remove);
+        updateLocation(lngLat, remove = remove);
         addMarker();
         flyToMarker();
+    }
+
+    function sourceify(geojson, id = 'result') {
+        if (map.getLayer(id)) {
+            map.removeLayer(id);
+        }
+        if (map.getSource(id)) {
+            map.removeSource(id);
+        }
+        map.addSource(id, {
+            'type': 'geojson',
+            'data': geojson
+        })
+        map.addLayer({
+            'id': id,
+            'type': 'fill',
+            'source': id, // reference the data source
+            'layout': {},
+            'paint': {
+            'fill-color': '#0080ff', // blue color fill
+            'fill-opacity': 0.5
+            }
+        });
+    }
+
+    async function getIntersecting() {
+		await fetch('https://public.carto.com/api/v2/sql?format=GeoJSON&q=select%20*%20from%20public.us_states%20where%20%22name%22=%27Massachusetts%27')
+            .then(data => {
+                return data.json();
+            })
+            .then(data => {
+                sourceify(data);
+                loadingState.update(n => !n)
+            })
     }
 
     onMount(() => {
@@ -77,11 +107,15 @@
             });
             geocoder.addTo('#geocoder');
             geocoder.on('result', e => {
+                loadingState.update(n => !n)
+                getIntersecting();
                 makeAddFly(e.result.geometry.coordinates);
             });
             map.on('click', (e) => {
+                loadingState.update(n => !n)
                 // with thanks to...
                 // https://stackoverflow.com/questions/56018065/how-to-clear-the-mapbox-geocoder
+                getIntersecting();
                 geocoder.clear();
                 document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
                 makeAddFly(e.lngLat);
