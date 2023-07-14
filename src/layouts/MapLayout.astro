@@ -5,5 +5,5 @@ import data from '../instance.json'
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
-    <Map client:load lngLat={[-120, 42]} mapboxStyle={data.mapProps.style}/>
+    <Map client:load initLngLat={} style={data.mapProps.style}/>
 </BaseLayout>

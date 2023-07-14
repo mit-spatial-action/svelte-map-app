@@ -1,60 +1,72 @@
 <script>
     import { onDestroy, setContext, onMount } from 'svelte';
 	import { mapbox, key } from '../scripts/mapbox.js';
+    import { writable } from 'svelte/store';
     import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
     import 'mapbox-gl/dist/mapbox-gl.css';
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
     
-    setContext(key, {
-        getMap: () => map,
-        getLngLat: () => lngLat
-    });
+    const selectedLocation = writable();
 
-    export let lngLat;
     export let projection='globe';
-    export let mapboxStyle='mapbox://styles/mapbox/satellite-v9';
-    export let initZoom=[1.8, 3];
-    export let initZoomDur=6000;
+    export let style='mapbox://styles/mapbox/satellite-v9';
+    export let init={
+        "lngLat": [-120, 42],
+        "zoom":[1.8, 3],
+        "zoomDur": 6000
+    }
     export let resultZoom=10;
     export let resultFlySpeed=2000;
 
     let container;
     let map;
-    let marker;
+
+    let location;
+
+    selectedLocation.subscribe((data) => {
+        location = data;
+    });
 
     function removeMarker() {
-        if(typeof marker !== 'undefined') {
-            marker.remove();
+        if(typeof location === 'object') {
+            location.marker.remove();
         }
     }
-    function createMarker() {
-        marker = new mapbox.Marker()
-            .setLngLat(lngLat)
-        marker.addTo(map);
+    function createMarker(lngLat, remove = true) {
+        (remove) ? removeMarker() : null;
+        selectedLocation.update(() => {
+            return {
+                "marker": new mapbox.Marker().setLngLat(lngLat),
+                "lngLat": lngLat
+            }
+        })
+    }
+
+    function addMarker() {
+        location.marker.addTo(map)
     }
 
     function flyToMarker(){
-        let zoom = (map.getZoom() > resultZoom) ? map.getZoom() : resultZoom;
         map.flyTo({
-            center: lngLat,
-            zoom: zoom,
+            center: location.lngLat,
+            zoom: (map.getZoom() > resultZoom) ? map.getZoom() : resultZoom,
             duration: resultFlySpeed,
             essential: true
         });
     }
 
-    function removeCreateFly(){
-        removeMarker();
-        createMarker();
+    function makeAddFly(lngLat, remove = true){
+        createMarker(lngLat, remove = remove);
+        addMarker();
         flyToMarker();
     }
 
     onMount(() => {
         map = new mapbox.Map({
             container: container,
-            style: mapboxStyle,
-            center: lngLat,
-            zoom: (initZoom.length === 2) ? initZoom[0] : initZoom,
+            style: style,
+            center: init.lngLat,
+            zoom: (init.zoom.length === 2) ? init.zoom[0] : init.zoom,
             bearing: 0,
             projection: projection
         });
@@ -65,32 +77,27 @@
             });
             geocoder.addTo('#geocoder');
             geocoder.on('result', e => {
-                lngLat = e.result.geometry.coordinates;
-                removeCreateFly();
-            });
-            geocoder.on('clear', () => {
-                removeMarker(marker);
+                makeAddFly(e.result.geometry.coordinates);
             });
             map.on('click', (e) => {
                 // with thanks to...
                 // https://stackoverflow.com/questions/56018065/how-to-clear-the-mapbox-geocoder
                 geocoder.clear();
                 document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
-                lngLat = e.lngLat;
-                removeCreateFly();
+                makeAddFly(e.lngLat);
             });
             map.setFog({
                 'color': 'rgba(255, 255, 255, 0.3)',
                 'high-color': '#eb0289',
-                'horizon-blend': 0.015, // Exaggerate atmosphere (default is .1),
-                'space-color': '#feeac3'//, 
+                'horizon-blend': 0.015, // default: .1
+                'space-color': '#feeac3', 
                 // 'star-intensity': 1
-            }); // Set the default atmosphere style
-            if (initZoom.length === 2) {
+            });
+            if (init.zoom.length === 2) {
                 map.flyTo({
-                    center: lngLat,
-                    zoom: initZoom[1],
-                    duration: initZoomDur,
+                    center: init.lngLat,
+                    zoom: init.zoom[1],
+                    duration: init.zoomDur,
                     essential: true // this animation is considered essential with respect to prefers-reduced-motion
                 });
             }
@@ -108,7 +115,9 @@
         <div class="content">
             <div id="geocoder" class="block"/>
             <div class="block">
-                {lngLat}
+                {#if location}
+                    {location.lngLat}
+                {/if}
             </div>
         </div>
     </div>
