@@ -3,7 +3,8 @@
     import { fade, fly } from 'svelte/transition';
     export let duration = 1.2;
     export let border = 5;
-    export let color = "red";
+    export let primaryColor = "red";
+    export let accentColor = "red";
 
     let loading;
     loadingState.subscribe((data) => {
@@ -13,21 +14,38 @@
 
 {#if loading}
 <div transition:fade class="wrapper">
-    <div transition:fly={{ y: 200, duration: 500 }} class="ripple">
+    <div transition:fly={{ y: 150, duration: 500 }} class="ripple">
         <div style="
-        --color: {color}; 
+        --accentColor: {accentColor}; 
+        --primaryColor: {primaryColor}; 
         --duration: {duration}; 
         --border: {border};"/>
         <div style="
-        --color: {color}; 
+        --accentColor: {accentColor}; 
+        --primaryColor: {primaryColor}; 
         --duration: {duration}; 
         --border: {border}; 
-        animation-delay: -{duration/2}s;"/>
+        animation-delay: -{duration/6}s;"/>
         <div style="
-        --color: {color}; 
+        --accentColor: {accentColor}; 
+        --primaryColor: {primaryColor}; 
         --duration: {duration}; 
         --border: {border}; 
-        animation-delay: -{duration/4}s;"/>
+        animation-delay: -{2 * duration / 6}s;"/>
+        <div style="
+        --accentColor: {accentColor}; 
+        --primaryColor: {primaryColor}; 
+        --duration: {duration}; 
+        --border: {border}; 
+        animation-delay: -{3 * duration / 6}s;"/>
+        <div style="
+        --accentColor: {accentColor}; 
+        --primaryColor: {primaryColor}; 
+        --duration: {duration}; 
+        --border: {border}; 
+        animation-delay: -{4 * duration / 6}s;"/>
+        <div class="circle" style="
+        --accentColor: {accentColor};"/>
     </div>
 </div>
 {/if}
@@ -44,7 +62,7 @@
 		top: 0;
 		bottom: 0;
 		/* color: rebeccapurple; */
-		background: rgb(255 255 255 / .3);
+		background: rgb(255 255 255 / .6);
     }
 
     .ripple,
@@ -62,10 +80,19 @@
 
     .ripple div {
         position: absolute;
-        border: calc(var(--border) * 1px) solid var(--color);
+        border: calc(var(--border) * 0.75px) solid;
         opacity: 1;
         border-radius: 50%;
         animation: ripple calc(var(--duration) * 1s) cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+    .ripple div.circle {
+        background: var(--accentColor);
+        top: 30px;
+        left: 30px;
+        width: 20px;
+        height: 20px;
+        border: 0px solid #000;
     }
     @keyframes ripple {
         0% {
@@ -74,6 +101,7 @@
         width: 8px;
         height: 8px;
         opacity: 0;
+        border-color: var(--accentColor);
         }
         4.9% {
         top: 36px;
@@ -81,13 +109,15 @@
         width: 8px;
         height: 8px;
         opacity: 0;
+        border-color: var(--accentColor);
         }
-        5% {
+        15% {
         top: 36px;
         left: 36px;
         width: 8px;
         height: 8px;
         opacity: 1;
+        border-color: var(--accentColor);
         }
         100% {
         top: 0;
@@ -95,6 +125,7 @@
         width: 80px;
         height: 80px;
         opacity: 0;
+        border-color: var(--primaryColor);
         }
     }
 </style>

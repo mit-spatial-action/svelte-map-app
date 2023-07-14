@@ -7,5 +7,5 @@ const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
     <Map client:load initLngLat={data.mapProps.lngLat} style={data.mapProps.style}/>
-    <Spinner client:load/ color={data.accentColor}/>
+    <Spinner client:load primaryColor={data.primaryColor} accentColor={data.accentColor}/>
 </BaseLayout>
