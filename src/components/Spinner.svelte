@@ -1,5 +1,4 @@
 <script>
-	import { fade } from 'svelte/transition';
 	import { loadingState } from '../scripts/stores.js';
     export let duration = 1.2;
     export let border = 5;

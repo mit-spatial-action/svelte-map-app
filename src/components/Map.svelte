@@ -1,6 +1,6 @@
 <script>
     import { onDestroy, onMount } from 'svelte';
-	import { mapbox, key } from '../scripts/mapbox';
+	import { mapbox } from '../scripts/mapbox';
 	import { selectedLocation, loadingState } from '../scripts/stores.js';
     import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
     import 'mapbox-gl/dist/mapbox-gl.css';
