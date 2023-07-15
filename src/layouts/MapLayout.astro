@@ -1,11 +1,11 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Map from '../components/Map.svelte';
-import Spinner from '../components/Spinner.svelte';
+import RippleLoader from '../components/RippleLoader.svelte';
 import data from '../instance.json'
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
     <Map client:load initLngLat={data.mapProps.lngLat} style={data.mapProps.style}/>
-    <Spinner client:load primaryColor={data.primaryColor} accentColor={data.accentColor}/>
+    <RippleLoader client:load primaryColor={data.primaryColor} accentColor={data.accentColor}/>
 </BaseLayout>

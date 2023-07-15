@@ -4,7 +4,7 @@
   export let pages;
 </script>
 
-<nav class="navbar" style="background-color:#fff0">
+<nav class="navbar">
       <Hamburger/>
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
