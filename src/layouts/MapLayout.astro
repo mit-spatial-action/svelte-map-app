@@ -6,6 +6,8 @@ import data from '../instance.json'
 const { frontmatter } = Astro.props;
 ---
 <BaseLayout pageName={frontmatter.title}>
-    <Map client:load initLngLat={data.mapProps.lngLat} style={data.mapProps.style}/>
+    <Map client:load 
+        maxBounds={data.mapProps.maxBounds} 
+        style={data.mapProps.style}/>
     <RippleLoader client:load primaryColor={data.primaryColor} accentColor={data.accentColor}/>
 </BaseLayout>

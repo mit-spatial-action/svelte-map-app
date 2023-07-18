@@ -10,16 +10,15 @@
     export let style='mapbox://styles/mapbox/satellite-v9';
     export let init ={
         "lngLat": [-120, 42],
-        "zoom":[1.8, 3],
+        "zoom": [1.8, 3],
         "zoomDur": 3000
     };
-    let bbox = [
+    export let maxBounds = [
         [-179,19], 
         [-67,72]
     ]
     export let resultZoom = 10;
     export let resultFlySpeed =2000;
-    let loaded = false;
     let container;
     let map;
 
@@ -177,7 +176,7 @@
             zoom: (init.zoom.length === 2) ? init.zoom[0] : init.zoom,
             bearing: 0,
             projection: projection,
-            maxBounds: bbox
+            maxBounds: maxBounds
         });
         map.on('style.load', () => {
             const geocoder = new MapboxGeocoder({

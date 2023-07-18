@@ -27,6 +27,10 @@
     "backgroundColor": "#ffffffff",
     "mapProps": {
         "style": "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy",
-        "center": [-120, 42]
+        "center": [-120, 42],
+        "maxBounds": [
+            [-179,19], 
+            [-67,72]
+        ]
     }
 }
