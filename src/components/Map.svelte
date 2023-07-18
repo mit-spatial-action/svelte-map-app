@@ -8,13 +8,13 @@
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
     export let projection='globe';
     export let style='mapbox://styles/mapbox/satellite-v9';
-    export let init={
+    export let init ={
         "lngLat": [-120, 42],
         "zoom":[1.8, 3],
         "zoomDur": 3000
     };
-    export let resultZoom=10;
-    export let resultFlySpeed=2000;
+    export let resultZoom = 10;
+    export let resultFlySpeed =2000;
     let loaded = false;
     let container;
     let map;
@@ -52,27 +52,49 @@
 
     function jsonSearch(json, string) {
         let results;
-        results = json.filter(function(entry) {
-            return entry.id.includes(string);
-        });
-        return results[0].text;
+        try {
+            json = json.context;
+            results = json.filter(function(entry) {
+                return entry.id.includes(string);
+            })[0].text;
+        } catch (exception) {
+            results = null
+        }
+        return results;
     }
 
     function parseEvents(result){
         let address;
-        if (result.place_type.includes("poi")) {
-            address = result.properties.address
+        if (result !== undefined) {
+            if ('place_type' in result) {
+                if (result.place_type.includes("poi")) {
+                    address = result.properties.address;
+                } else if (result.place_type.includes("address")) {
+                    if ('address' in result) {
+                        address = result.address.concat(" ", result.text);
+                    } else {
+                        address = result.text;
+                    }
+                } else {
+                    address = null;
+                }
+            } else {
+                address = null;
+            }
         } else {
-            address = result.address.concat(" ", result.text)
+            address = null;
         }
-        return {
+        let data = {
             "address": address,
-            "muni": jsonSearch(result.context, "place"),
-            "state": jsonSearch(result.context, "region"),
-            "county": jsonSearch(result.context, "district"),
-            "zip": jsonSearch(result.context, "postcode"),
-            "lngLat": result.geometry.coordinates
+            "muni": jsonSearch(result, "place"),
+            "state": jsonSearch(result, "region"),
+            "county": jsonSearch(result, "district"),
+            "zip": jsonSearch(result, "postcode"),
+            "lngLat": result.lngLat,
+            "valid": (jsonSearch(result, "country") === "United States") ? true : false
         }
+        console.log(data);
+        return data
     }
 
     function makeAddFly(data, remove = true){
@@ -96,10 +118,10 @@
         map.addLayer({
             'id': id,
             'type': 'fill',
-            'source': id, // reference the data source
+            'source': id,
             'layout': {},
             'paint': {
-            'fill-color': '#0080ff', // blue color fill
+            'fill-color': '#0080ff',
             'fill-opacity': 0.5
             }
         });
@@ -118,7 +140,15 @@
                 return data.json()
             })
             .then((data) => {
-                return data.features[0]
+                data = data.features[0];
+                if (data === undefined) {
+                    data = {
+                        'lngLat': e.lngLat
+                    }
+                } else {
+                    data.lngLat = e.lngLat
+                }
+                return data
             });
     }
 
@@ -154,15 +184,14 @@
             geocoder.addTo('#geocoder');
             geocoder.on('result', (e) => {
                 toggleLoading();
-                let d = parseEvents(e.result);
+                e = e.result;
+                e.lngLat = e.geometry.coordinates;
+                let d = parseEvents(e);
                 getIntersecting();
                 makeAddFly(d);
             });
-            map.on('zoomend', () => {
-                if (!loaded) {
-                    toggleLoading();
-                    loaded = true;
-                }
+            map.once('zoomend', () => {
+                toggleLoading();
             });
             map.on('click', (e) => {
                 toggleLoading();
@@ -211,7 +240,7 @@
                     {#if location.address}
                         <p>{location.address}</p>
                     {/if}
-                    <button class="delete"></button>
+                    <button class="delete is-right"></button>
                 </div>
             </div>
             <div class="card-content">
