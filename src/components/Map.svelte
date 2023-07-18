@@ -13,6 +13,10 @@
         "zoom":[1.8, 3],
         "zoomDur": 3000
     };
+    let bbox = [
+        [-179,19], 
+        [-67,72]
+    ]
     export let resultZoom = 10;
     export let resultFlySpeed =2000;
     let loaded = false;
@@ -172,7 +176,8 @@
             center: init.lngLat,
             zoom: (init.zoom.length === 2) ? init.zoom[0] : init.zoom,
             bearing: 0,
-            projection: projection
+            projection: projection,
+            maxBounds: bbox
         });
         map.on('style.load', () => {
             const geocoder = new MapboxGeocoder({
