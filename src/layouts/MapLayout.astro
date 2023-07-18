@@ -2,8 +2,10 @@
 import BaseLayout from './BaseLayout.astro';
 import Map from '../components/Map.svelte';
 import RippleLoader from '../components/RippleLoader.svelte';
+	import ModalBox from './ModalBox.svelte';
 import data from '../instance.json'
 const { frontmatter } = Astro.props;
+let showModal = false;
 ---
 <BaseLayout pageName={frontmatter.title}>
     <Map client:load 

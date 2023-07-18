@@ -1,6 +1,8 @@
 <script>
     import { onDestroy, onMount } from 'svelte';
 	import { mapbox } from '../scripts/mapbox';
+    import Modal from './Modal.svelte';
+    let showModal = false;
 	import { selectedLocation, loadingState } from '../scripts/stores.js';
     import { fade } from 'svelte/transition';
     import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
@@ -96,15 +98,18 @@
             "lngLat": result.lngLat,
             "valid": (jsonSearch(result, "country") === "United States") ? true : false
         }
-        console.log(data);
         return data
     }
 
     function makeAddFly(data, remove = true){
-        updateLocation(data, remove = remove);
-        console.log(selectedLocation);
-        addMarker();
-        flyToMarker();
+        if (!data.valid) {
+            showModal = true;
+        } else {
+            updateLocation(data, remove = remove);
+            console.log(selectedLocation);
+            addMarker();
+            flyToMarker();
+        }
     }
 
     function sourceify(geojson, id = 'result') {
@@ -137,13 +142,14 @@
     async function reverseGeocode(e) {
         const lng = e.lngLat.lng;
         const lat = e.lngLat.lat;
-        const query_url =`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?types=poi,address&country=us&access_token=${mapbox.accessToken}`;
+        const query_url =`https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?country=us&access_token=${mapbox.accessToken}`;
         return await fetch(query_url)
             .then((data) => {
                 return data.json()
             })
             .then((data) => {
                 data = data.features[0];
+                console.log(data);
                 if (data === undefined) {
                     data = {
                         'lngLat': e.lngLat
@@ -234,6 +240,11 @@
         };
     });
 </script>
+
+<Modal bind:showModal>
+    Please select a point within the United States.
+</Modal>
+
 <div class="columns">
     <div class="column is-half is-offset-one-quarter">
     <div id="geocoder" class = "block"/>
