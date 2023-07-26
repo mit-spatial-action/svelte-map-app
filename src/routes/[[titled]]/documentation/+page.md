@@ -1,7 +1,6 @@
 ---
-layout: '../layouts/TitledLayout.astro'
 title: Documentation
 description: boilerplate.
 ---
 
-Testing about.
+<p>test!</p>
