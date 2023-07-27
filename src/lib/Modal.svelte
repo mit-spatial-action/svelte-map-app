@@ -1,8 +1,6 @@
 <script>
     export let showModal;
-
     let dialog;
-
     $: if (dialog && showModal) dialog.showModal();
 </script>
 

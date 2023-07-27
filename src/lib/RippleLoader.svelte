@@ -1,5 +1,5 @@
 <script>
-	import { loadingState } from '../scripts/stores.js';
+    export let loadingState;
     import { fade, fly } from 'svelte/transition';
 
     export let duration = 1.2;
@@ -13,13 +13,9 @@
 	export let denom = 6;
     const steps = Array.from(Array(denom - 1), (_, i) => i + 1)
 
-    let loading;
-    loadingState.subscribe((data) => {
-        loading = data;
-    });
 </script>
 
-{#if loading}
+{#if loadingState}
 <div transition:fade class="wrapper">
     <div transition:fly={{ 
         y: flyInProps.distance, 

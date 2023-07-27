@@ -15,7 +15,9 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@mapbox/mapbox-gl-geocoder": "^5.0.1",
 		"bulma": "^0.9.4",
+		"mapbox-gl": "^2.15.0",
 		"mdsvex": "^0.11.0"
 	}
 }

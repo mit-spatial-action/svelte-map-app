@@ -1,0 +1,254 @@
+<script>
+    import { onDestroy, onMount, setContext } from 'svelte';
+    import RippleLoader from '$lib/RippleLoader.svelte';
+    import ForwardGeocoder from '$lib/Map/Geocoders/Forward.svelte';
+    import ReverseGeocoder from '$lib/Map/Geocoders/Reverse.svelte';
+    import Marker from '$lib/Map/Marker.svelte';
+    
+    import { mapbox, key } from '$lib/scripts/mapbox';
+
+    export let mapbox_token;
+    mapbox.accessToken = mapbox_token;
+    
+    import Modal from '$lib/Modal.svelte';
+    // let showModal = false;
+    
+    import { fade } from 'svelte/transition';
+    export let projection = 'globe';
+    export let style = 'mapbox://styles/mapbox/satellite-v9';
+    export let init = {
+        "lngLat": [-120, 42],
+        "zoom": [1.8, 3],
+        "zoomDur": 3000
+    };
+    export let maxBounds = [
+        [-179,19], 
+        [-67,72]
+    ]
+    export let resultZoom = 10;
+    export let resultFlySpeed = 2000;
+    let container;
+    let map;
+
+    setContext(key, {
+		getMap: () => map
+	});
+
+    let location = {};
+    let loadingState = true;
+
+    // function makeAddFly(data, remove = true){
+    //     if (!data.valid) {
+    //         showModal = true;
+    //     } else {
+    //         // updateLocation(data, remove = remove);
+    //         addMarker();
+    //         flyToMarker();
+    //     }
+    // }
+
+
+        // toggleLoading();
+        // reverseGeocode(e)
+        //     .then((data) => {
+        //         return parseEvents(data);
+        //     })
+        //     .then((data) => {
+        //         makeAddFly(data);
+        //         // geocoder.clear();
+        //         // document.getElementsByClassName('mapboxgl-ctrl-geocoder--input')[0].blur();
+        //         toggleLoading();
+        // })
+
+
+    function flyToLngLat(lngLat){
+        map.flyTo({
+            center: lngLat,
+            zoom: (map.getZoom() > resultZoom) ? map.getZoom() : resultZoom,
+            duration: resultFlySpeed,
+            essential: true
+        });
+    }
+
+    function jsonSearch(json, string) {
+        let results;
+        try {
+            json = json.context;
+            results = json.filter(function(entry) {
+                return entry.id.includes(string);
+            })[0].text;
+        } catch (exception) {
+            results = null
+        }
+        return results;
+    }
+
+    function parseEvents(result){
+        let address;
+        if (result !== undefined) {
+            if ('place_type' in result) {
+                if (result.place_type.includes("poi")) {
+                    address = result.properties.address;
+                } else if (result.place_type.includes("address")) {
+                    if ('address' in result) {
+                        address = result.address.concat(" ", result.text);
+                    } else {
+                        address = result.text;
+                    }
+                } else {
+                    address = null;
+                }
+            } else {
+                address = null;
+            }
+        } else {
+            address = null;
+        }
+        let data = {
+            "address": address,
+            "muni": jsonSearch(result, "place"),
+            "state": jsonSearch(result, "region"),
+            "county": jsonSearch(result, "district"),
+            "zip": jsonSearch(result, "postcode"),
+            "lngLat": result.lngLat,
+            "valid": (jsonSearch(result, "country") === "United States") ? true : false
+        }
+        return data
+    }
+
+    // function sourceify(geojson, id = 'result') {
+    //     if (map.getLayer(id)) {
+    //         map.removeLayer(id);
+    //     }
+    //     if (map.getSource(id)) {
+    //         map.removeSource(id);
+    //     }
+    //     map.addSource(id, {
+    //         'type': 'geojson',
+    //         'data': geojson
+    //     })
+    //     map.addLayer({
+    //         'id': id,
+    //         'type': 'fill',
+    //         'source': id,
+    //         'layout': {},
+    //         'paint': {
+    //         'fill-color': '#0080ff',
+    //         'fill-opacity': 0.5
+    //         }
+    //     });
+    // }
+
+    function toggleLoading() {
+        loadingState = !loadingState
+    }
+
+    $: ('lngLat' in location) ? flyToLngLat(location.lngLat) : null;
+
+    onMount(() => {
+        map = new mapbox.Map({
+            container: container,
+            style: style,
+            center: init.lngLat,
+            zoom: (init.zoom.length === 2) ? init.zoom[0] : init.zoom,
+            bearing: 0,
+            projection: projection,
+            maxBounds: maxBounds
+        });
+        map.once('zoomend', () => {
+            toggleLoading();
+        });
+        map.on('style.load', () => {
+            map.on('click', (e) => {
+                location.lngLat = e.lngLat;
+            })
+            map.setFog({
+                'color': 'rgba(255, 255, 255, 0.3)',
+                'high-color': '#eb0289',
+                'horizon-blend': 0.015, // default: .1
+                'space-color': '#feeac3', 
+                // 'star-intensity': 1
+            })
+            if (init.zoom.length === 2) {
+                map.flyTo({
+                    center: init.lngLat,
+                    zoom: init.zoom[1],
+                    duration: init.zoomDur,
+                    essential: true
+                });
+            }
+        });
+    });
+
+    onDestroy(() => {
+        if (map) {
+             map.remove()
+        };
+    });
+
+    // async function getIntersecting() {
+	// 	await fetch('https://public.carto.com/api/v2/sql?format=GeoJSON&q=select%20*%20from%20public.us_states%20where%20%22name%22=%27Massachusetts%27')
+    //         .then((data) => {
+    //             return data.json();
+    //         })
+    //         .then((data) => {
+    //             sourceify(data);
+    //         })
+    //         .then(() => {
+    //             toggleLoading();
+    //         })
+    // }
+</script>
+
+<!-- <div class="columns">
+    <div class="column is-half is-offset-one-quarter">
+    <div id="geocoder" class = "block"/>
+    {#if location}
+        <div transition:fade id="info-interface" class="card">
+            <div class="card-header">
+                <div class="card-header-title">
+                    {#if location.address}
+                        <p>{location.address}</p>
+                    {/if}
+                    <button class="delete is-right"></button>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="content">
+                        {#if location.muni}
+                            <p>{location.muni}, {#if location.state}{location.state}{/if} {#if location.zip}{location.zip}{/if}</p>
+                        {/if}
+                    <div class="block">
+                        {#if location.lngLat}
+                            {location.lngLat}
+                        {/if}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {/if}
+    </div>
+</div> -->
+
+<!-- <Modal bind:showModal>
+    Please select a point within the United States.
+</Modal> -->
+<div bind:this={container}>
+    {#if map}
+        <RippleLoader bind:loadingState />
+        <Marker bind:location />
+        <ForwardGeocoder bind:location />
+        <ReverseGeocoder bind:location />
+    {/if}
+</div>
+
+<style>
+	div {
+        position: absolute; 
+        top: 0; 
+        bottom: 0; 
+		width: 100%;
+		height: 100%;
+	}
+
+</style>
