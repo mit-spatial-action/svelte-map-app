@@ -1,7 +1,7 @@
 <script>
     import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
     import { onMount, getContext } from 'svelte';
-    import { mapbox, key } from '$lib/scripts/mapbox';
+    import { mapbox, key } from '$lib/scripts/utils';
 
     export let location;
     export let singleMarker = true;

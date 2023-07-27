@@ -1,6 +1,6 @@
 <script>
     import { getContext } from 'svelte';
-    import { mapbox, key } from '$lib/scripts/mapbox';
+    import { mapbox, key } from '$lib/scripts/utils';
 
     export let location;
     export let singleMarker = true;

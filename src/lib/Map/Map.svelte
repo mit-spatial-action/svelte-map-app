@@ -5,7 +5,7 @@
     import ReverseGeocoder from '$lib/Map/Geocoders/Reverse.svelte';
     import Marker from '$lib/Map/Marker.svelte';
     
-    import { mapbox, key } from '$lib/scripts/mapbox';
+    import { mapbox, key } from '$lib/scripts/utils';
 
     export let mapbox_token;
     mapbox.accessToken = mapbox_token;
