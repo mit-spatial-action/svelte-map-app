@@ -4,7 +4,8 @@
   export let pages;
 </script>
 
-<nav class="navbar">
+<nav class="navbar is-fixed-top">
+    <div class="container">
       <Hamburger/>
       <div id="navMenu" class="navbar-menu">
         <div class="navbar-start">
@@ -15,4 +16,5 @@
         {/if}
         </div>
       </div>
+    </div>
 </nav>

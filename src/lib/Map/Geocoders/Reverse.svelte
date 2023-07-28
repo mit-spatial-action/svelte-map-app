@@ -6,6 +6,7 @@
     const map = getMap()
 
     export let location;
+    export let loadingState;
 
     async function reverseGeocode(lngLat) {
         const endpoint = 'https://api.mapbox.com/geocoding/v5/mapbox.places/'
@@ -13,11 +14,15 @@
         const query = `${endpoint}${lngLat.lng},${lngLat.lat}.${f}?country=us&access_token=${mapbox.accessToken}`;
         return await fetch(query)
             .then((d) => {
-                return d.json()
+                return d.json();
             })
             .then((d) => {
-                d = d.features[0].context;
-                (d !== undefined) ? location.result = d : null;
+                d = d.features[0]
+                location.address = d.address;
+                location.place_type = d.place_type[0];
+                location.text = d.text;
+                location.context = d.context;
+                loadingState = !loadingState;
             });
     }
     onMount(() => { 

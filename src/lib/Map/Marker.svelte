@@ -11,8 +11,8 @@
         ('marker' in location) ? location.marker.remove() : null;
     }
 
-    function addMarker(lngLat) {
-        let marker = new mapbox.Marker().setLngLat(lngLat);
+    function addMarker(location) {
+        let marker = new mapbox.Marker().setLngLat(location.lngLat);
         marker.addTo(map);
         return marker;
     }
@@ -22,5 +22,5 @@
     }
 
     $: (singleMarker) ? removeMarker(location) : null;
-    $: ('lngLat' in location) ? setLocation(addMarker(location.lngLat)) : null;
+    $: ('lngLat' in location) ? setLocation(addMarker(location)) : null;
 </script>

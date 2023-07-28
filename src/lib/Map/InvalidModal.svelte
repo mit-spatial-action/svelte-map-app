@@ -1,13 +1,13 @@
 <script>
-    export let showModal;
+    export let invalidModal;
     let dialog;
-    $: if (dialog && showModal) dialog.showModal();
+    $: if (dialog && invalidModal) dialog.showModal();
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-noninteractive-element-interactions -->
 <dialog 
     bind:this={dialog}
-	on:close={() => (showModal = false)}
+	on:close={() => (invalidModal = false)}
 	on:click|self={() => dialog.close()}
 >	<!-- svelte-ignore a11y-no-static-element-interactions -->
     <div on:click|stopPropagation>

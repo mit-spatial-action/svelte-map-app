@@ -4,8 +4,10 @@
     /** @type {import('./$types').PageData} */
     export let data
 </script>
-<Map 
-    mapbox_token={data.mapbox_token}
-    maxBounds={site_data.mapProps.maxBounds} 
-    style={site_data.mapProps.style}>
-</Map>
+<section>
+    <Map 
+        mapbox_token={data.mapbox_token}
+        maxBounds={site_data.mapProps.maxBounds} 
+        style={site_data.mapProps.style}>
+    </Map>
+</section>

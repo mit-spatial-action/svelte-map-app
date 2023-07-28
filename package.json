@@ -3,13 +3,16 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
+		"css-build": "node-sass --omit-source-map-url src/styles/style.scss src/styles/style.css",
+		"css-watch": "npm run css-build -- --watch",
+		"dev": "vite dev & npm run css-watch",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"node-sass": "^9.0.0",
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2"
 	},

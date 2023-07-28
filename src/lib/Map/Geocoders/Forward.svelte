@@ -1,38 +1,30 @@
 <script>
     import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+    import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
     import { onMount, getContext } from 'svelte';
     import { mapbox, key } from '$lib/scripts/utils';
-
+    export let loadingState;
     export let location;
-    export let singleMarker = true;
     const { getMap } = getContext(key);
-    const map = getMap()
     const geocoder = new MapboxGeocoder({
         accessToken: mapbox.accessToken,
         mapboxgl: mapbox,
         countries: 'us',
-        types: 'address,poi'
+        types: 'address,poi',
+        marker: false
     });
     onMount(() => {
-        geocoder.addTo('#geocoder');
+        let map = getMap()
+        map.addControl(geocoder, 'top-left');
         geocoder.on('result', (e) => {
             let result = e.result
-            location.lngLat = result.geometry.coordinates;
+            let coords = result.geometry.coordinates;
+            location.lngLat = new mapbox.LngLat(coords[0], coords[1]);
+            location.address = result.address;
+            location.place_type = result.place_type[0];
+            location.text = result.text;
             location.context = result.context;
         });
     });
     
 </script>
-<div id="geocoder">
-
-</div>
-
-<style>
-    div {
-        position: absolute;
-        z-index: 50;
-        /* left: 0px;
-        bottom: 0px;
-        min-height:50%; */
-    }
-</style>
