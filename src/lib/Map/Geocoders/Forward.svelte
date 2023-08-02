@@ -3,7 +3,6 @@
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
     import { onMount, getContext } from 'svelte';
     import { mapbox, key } from '$lib/scripts/utils';
-    export let loadingState;
     export let location;
     const { getMap } = getContext(key);
     const geocoder = new MapboxGeocoder({

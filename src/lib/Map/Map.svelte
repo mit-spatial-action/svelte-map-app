@@ -2,6 +2,7 @@
     import { onDestroy, onMount, setContext } from 'svelte';
     import ForwardGeocoder from '$lib/Map/Geocoders/Forward.svelte';
     import ReverseGeocoder from '$lib/Map/Geocoders/Reverse.svelte';
+    import SelectedGeometry from '$lib/Map/SelectedGeometry.svelte';
     import Marker from '$lib/Map/Marker.svelte';
     import InfoBox from '$lib/Map/InfoBox.svelte';
     import RippleLoader from '$lib/RippleLoader.svelte';
@@ -12,17 +13,14 @@
 
     export let mapbox_token;
     mapbox.accessToken = mapbox_token;
-    
-    import InvalidModal from '$lib/Map/InvalidModal.svelte';
-    let locationInvalid = false;
 
-    export let projection = 'globe';
     export let style = 'mapbox://styles/mapbox/satellite-v9';
-    export let init = {
-        "lngLat": [-120, 42],
-        "zoom": [1.8, 3],
-        "zoomDur": 3000
-    };
+    export let projection = 'globe';
+    export let initLngLat = [-120, 42];
+    initLngLat = new mapbox.LngLat(initLngLat[0], initLngLat[1])
+    export let initZoom = [1.8 ,3];
+    export let initZoomDur  = 3000;
+    
     export let singleMarker = true;
     export let maxBounds = [
         [-179,19], 
@@ -54,15 +52,16 @@
     $: ('lngLat' in location) ? flyToLngLat(location.lngLat) : null;
 
     onMount(() => {
-        map = new mapbox.Map({
+        let mapOptions = {
             container: container,
             style: style,
-            center: init.lngLat,
-            zoom: (init.zoom.length === 2) ? init.zoom[0] : init.zoom,
+            center: initLngLat,
+            zoom: (initZoom.length === 2) ? initZoom[0] : initZoom,
             bearing: 0,
             projection: projection,
             maxBounds: maxBounds
-        });
+        }
+        map = new mapbox.Map(mapOptions);
         
         map.on ('load', () => {
             map.resize();
@@ -73,7 +72,6 @@
         map.on('style.load', () => {
             map.on('click', (e) => {
                 location.lngLat = e.lngLat;
-                loadingState = !loadingState;
             })
             map.setFog({
                 'color': 'rgba(255, 255, 255, 0.3)',
@@ -82,11 +80,11 @@
                 'space-color': '#feeac3', 
                 'star-intensity': 1
             })
-            if (init.zoom.length === 2) {
+            if (initZoom.length === 2) {
                 map.flyTo({
-                    center: init.lngLat,
-                    zoom: init.zoom[1],
-                    duration: init.zoomDur,
+                    center: initLngLat,
+                    zoom: initZoom[1],
+                    duration: initZoomDur,
                     essential: true
                 });
             }
@@ -100,17 +98,15 @@
     });
 </script>
 
-<!-- <Modal bind:showModal>
-    Please select a point within the United States.
-</Modal> -->
 <div class="container">
     <div id ="map" class="is-fullheight" bind:this={container}>
         {#if map}
             <RippleLoader bind:loadingState />
             <Marker bind:location bind:singleMarker />
-            <ReverseGeocoder bind:location bind:loadingState />
-            <ForwardGeocoder bind:location bind:loadingState />
-            <InvalidModal bind:locationInvalid/>
+            <ReverseGeocoder bind:location />
+            <ForwardGeocoder bind:location />
+            <SelectedGeometry bind:location />
+            <!-- <InvalidModal bind:locationInvalid/> -->
         {/if}
     </div>
     <InfoBox bind:location/>

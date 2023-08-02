@@ -7,10 +7,6 @@
     const { getMap } = getContext(key);
     const map = getMap()
 
-    function removeMarker(location) {
-        ('marker' in location) ? location.marker.remove() : null;
-    }
-
     function addMarker(location) {
         let marker = new mapbox.Marker().setLngLat(location.lngLat);
         marker.addTo(map);
@@ -21,6 +17,6 @@
         location.marker = marker;
     }
 
-    $: (singleMarker) ? removeMarker(location) : null;
+    $: ('marker' in location) ? location.marker.remove() : null;
     $: ('lngLat' in location) ? setLocation(addMarker(location)) : null;
 </script>
