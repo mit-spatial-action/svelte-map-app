@@ -1,38 +1,22 @@
-# create-svelte
+# svelte-map-app
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+<img width="1333" alt="screenshot" src="https://github.com/Unnamed-Lab-DUSP/svelte-map-app/assets/10646361/1bb15da4-d70e-4a84-8349-9d8cb00fef13">
 
-## Creating a project
+This is a simple templated mapping application, built using Svelte, SvelteKit, Node, Bulma, and Mapbox that can be easily customized using the fields in `src/config/instance.json`. It includes basic, but common, documentation pages, which can be written in markdown, and the map allows the user to select locations using click events or forward geocoding, which populate a bare-bones info panel.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Configuration
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### Node
+Assuming you have node installed, you can install all dependencies by running `npm install` from the root directory.
 
-# create a new project in my-app
-npm create svelte@latest my-app
+### MapBox Token
+For the application to run, you'll need a MapBox token. The application expects it to be stored in a `.env` file in the root directory. E.g., this file should look like...
+
+```
+MAPBOX_TOKEN='your token here`
 ```
 
-## Developing
+Important note: the token _will be exposed to the client_! As such, before deploying, you should make sure that your token is appropriately scoped and that it has URL restrictions in place. 
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Running
+Run `npm run css-build && npm run dev` from the root folder. (On subsequent runs, you can simply run `npm run dev`. This starts a vite server (`vite dev`) and a node-sass watcher that watches for changes in `src/styles/style.scss` (the latter supports rapid Bulma development). 
