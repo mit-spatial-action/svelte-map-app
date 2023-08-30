@@ -1,9 +1,7 @@
 <script>
-    import Tabs from '$lib/components/InfoPanel/Tabs.svelte'
+    import Tabs from '$lib/components/InfoPanel/Tabs.svelte';
     import Card from '$lib/components/InfoPanel/Card.svelte';
     export let data;
-    
-    $: console.log(data)
     
     let mine_text;
 

@@ -11,6 +11,10 @@
 
     import { mapbox, key } from '$lib/scripts/utils';
 
+
+    import Device from 'svelte-device-info';
+    let mobile;
+
     export let mapbox_token;
     mapbox.accessToken = mapbox_token;
 
@@ -36,8 +40,6 @@
     let gcResult;
     let selected;
     let marker;
-
-    $: mobileResultState = (selected !== undefined);
     
     let loadingState = true;
 
@@ -57,6 +59,7 @@
     $: (lngLat) ? flyToLngLat(lngLat) : null;
 
     onMount(() => {
+        mobile = Device.isPhone;
         let mapOptions = {
             container: container,
             style: style,
@@ -188,7 +191,7 @@
     });
 </script>
 
-<div id ="map" class={(mobileResultState) ? 'non-interactive' : null} bind:this={container}>
+<div id ="map" class={(selected !== undefined && mobile) ? 'non-interactive' : null} bind:this={container}>
     {#if map}
         <RippleLoader bind:loadingState />
         <Marker bind:lngLat bind:marker />
