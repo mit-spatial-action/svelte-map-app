@@ -1,8 +1,20 @@
 @charset "utf-8";
 
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 
-$family-sans-serif: "Nunito", sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+$family-sans-serif: 'Figtree', sans-serif;
+$column-gap: 0.75rem;
+
+// @import '$lib/config/instance.json';
+
+// $dark: #363636;
+$primary: #f0a800;
+$success: #177E8A;
+$link: #f0a800;
+$danger: #d63088;
+$body-background-color: hsl(0, 0%, 21%);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
@@ -10,14 +22,46 @@ $family-sans-serif: "Nunito", sans-serif;
 @import "../../node_modules/bulma/sass/elements/button.sass";
 @import "../../node_modules/bulma/sass/elements/icon.sass";
 @import "../../node_modules/bulma/sass/elements/title.sass";
+@import "../../node_modules/bulma/sass/elements/tag.sass";
+@import "../../node_modules/bulma/sass/elements/box.sass";
 @import "../../node_modules/bulma/sass/elements/other.sass";
 @import "../../node_modules/bulma/sass/form/_all.sass";
 @import "../../node_modules/bulma/sass/grid/columns.sass";
+@import "../../node_modules/bulma/sass/helpers/typography.sass";
+@import "../../node_modules/bulma/sass/helpers/spacing.sass";
 @import "../../node_modules/bulma/sass/helpers/flexbox.sass";
+@import "../../node_modules/bulma/sass/helpers/color.sass";
 @import "../../node_modules/bulma/sass/components/navbar.sass";
+@import "../../node_modules/bulma/sass/components/tabs.sass";
 @import "../../node_modules/bulma/sass/components/card.sass";
 @import "../../node_modules/bulma/sass/layout/section.sass";
 @import "../../node_modules/bulma/sass/layout/hero.sass";
+
+html {
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.shadow {
+  filter: drop-shadow(.18rem .18rem 0rem $danger-dark);
+}
+
+.info-box > * {
+  z-index: 20;
+}
+
+$backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1532030351639-5C2Q8FQP0YTY8E5XUUO1/Ephiphany+School+1.jpg');
+@each $key, $image in $backgrounds {
+  .hero-#{$key} {
+    @extend .hero;
+    background-image: url(#{$image});
+    background-size: cover;
+    background-position: center;
+  }
+}
 
 .is-fullheight {
   min-height: calc(100vh - (#{$navbar-height}));
@@ -26,4 +70,46 @@ $family-sans-serif: "Nunito", sans-serif;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
+}
+
+#map {
+  height: calc(100vh - (#{$navbar-height}));
+  width: 100vw;
+  position: fixed;
+  top: calc(#{$navbar-height});
+  // left: 0;
+  // min-height: calc(100vh - (#{$navbar-height}));
+  // max-height: calc(100vh - (#{$navbar-height}));
+  // height: calc(100vh - (#{$navbar-height}));
+}
+
+// .sticky-top {
+//   position: sticky; 
+//   top: calc(#{$navbar-height} + 5rem);
+// }
+
+// @media only screen and (max-device-width : 480px) {
+//   .info-box {
+//     top: calc(#{$navbar-height} + 5rem);
+//   }
+// }
+
+.button {
+  border: none;
+}
+
+@include mobile {
+  .mapboxgl-ctrl-top-left {
+    right: 0;
+    padding: 0.75rem;
+  }
+
+  .mapboxgl-ctrl-top-left > .mapboxgl-ctrl-geocoder.mapboxgl-ctrl {
+    z-index:100 !important;
+    margin: 0;
+  }
+
+  .info-box {
+    margin-top: calc(36px + 1.5rem);
+  }
 }

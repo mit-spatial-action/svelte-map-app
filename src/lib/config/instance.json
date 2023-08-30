@@ -1,36 +1,46 @@
 {
     "appTitle": "Siting Solar",
-    "appDescription": "",
-    "appType": "",
+    "appDescription": "This mapping tool reflects currently available data geographic eligibility for the Inflation Reduction Act Low-Income Communities Bonus Credit Program.",
+    "logo": "https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500927478729-Z0V8SX4DQTPDMRY2D0TX/RE_Logo_MdText_Yellow_crop-01.png?format=1500w",
     "authors": [{
         "name": "Eric Robsky Huntley, PhD",
-        "affiliation": "MIT DUSP",
         "location": "Cambridge, MA",
+        "role": "Design, Development, and Research",
         "url": "https://dusp.mit.edu/people/eric-robsky-huntley"
-    }],
+    }, {
+        "name": "Kit TeSelle",
+        "affiliation": "Resonant Energy",
+        "role": "Research",
+        "url": "https://www.resonant.energy/staff/"
+    }
+    ],
     "orgs": [{
         "name": "Resonant Energy",
         "url": "https://resonant.Energy",
-        "location": "Boston, MA",
-        "logo": "src/media/resonant.png"
+        "description": "a Boston-based solar provider with a mission to build wealth in Environmental Justice communities through solar power"
     }],
     "pages": {
         "Home": "/",
         "Map": "map",
-        "Documentation": "documentation",
-        "Contact": "contact",
-        "About": "about"
+        "Documentation": "documentation"
     },
     "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
-    "primaryColor": "#fbaf13ff",
-    "accentColor": "#eb008bff",
-    "backgroundColor": "#ffffffff",
-    "mapProps": {
+    "primaryColor": "#f0a800",
+    "warningColor": "#d63088",
+    "linkColor": "#f0a800",
+    "map": {
         "style": "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy",
-        "center": [-120, 42],
         "maxBounds": [
             [-179,19], 
             [-67,72]
-        ]
+        ],
+        "resultZoom": 10,
+        "singleMarker": true,
+        "projection": "globe",
+        "init": {
+            "lngLat": [-120, 42],
+            "zoom": [1.8, 3],
+            "zoomDur": 3000
+        }
     }
 }

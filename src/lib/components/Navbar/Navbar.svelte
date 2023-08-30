@@ -1,6 +1,6 @@
 <script>
-  import Hamburger from './Hamburger.svelte';
-  import NavbarItem from './NavbarItem.svelte';
+  import Hamburger from '$lib/components/Navbar/Hamburger.svelte';
+  import NavbarItem from '$lib/components/Navbar/NavbarItem.svelte';
   import site_data from '$lib/config/instance.json';
   export let pages;
 </script>

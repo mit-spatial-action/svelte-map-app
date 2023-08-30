@@ -1,1 +1,0 @@
-<a class="button" href="/map">Where Can I Build?</a>

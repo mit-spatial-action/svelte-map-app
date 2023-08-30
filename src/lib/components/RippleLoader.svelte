@@ -4,8 +4,10 @@
 
     export let duration = 1.2;
     export let border = 3;
-    export let primaryColor = "red";
-    export let accentColor = "red";
+    import site_data from '$lib/config/instance.json';
+    export let primaryColor = site_data.primaryColor;
+    export let warningColor = site_data.warningColor;
+    
     export let flyInProps = {
         "duration": 500,
         "distance": 150
@@ -16,21 +18,21 @@
 </script>
 
 {#if loadingState}
-<div transition:fade class="wrapper">
+<div transition:fade={{duration: 800}} class="wrapper">
     <div transition:fly={{ 
         y: flyInProps.distance, 
         duration: flyInProps.duration 
         }} class="rippler">
         {#each steps as step}
             <div class="ripple-wave" style="
-            --accentColor: {accentColor}; 
+            --warningColor: {warningColor}; 
             --primaryColor: {primaryColor}; 
             --duration: {duration}; 
             --border: {border};
             animation-delay: -{ step * duration / denom}s;"/>
         {/each}
         <div class="circle-core" style="
-        --accentColor: {accentColor};"/>
+        --warningColor: {warningColor};"/>
     </div>
 </div>
 {/if}
@@ -47,7 +49,7 @@
 		top: 0;
 		bottom: 0;
 		/* color: rebeccapurple; */
-		background: rgb(255 255 255 / .6);
+		background: #363636BB;
     }
 
     .rippler,
@@ -75,7 +77,7 @@
     }
 
     .rippler .circle-core {
-        background: var(--accentColor);
+        background: var(--warningColor);
         top: 30px;
         left: 30px;
         width: 20px;
@@ -90,7 +92,7 @@
             width: 8px;
             height: 8px;
             opacity: 0;
-            border-color: var(--accentColor);
+            border-color: var(--warningColor);
         }
         4.9% {
             top: 36px;
@@ -98,7 +100,7 @@
             width: 8px;
             height: 8px;
             opacity: 0;
-            border-color: var(--accentColor);
+            border-color: var(--warningColor);
         }
         15% {
             top: 36px;
@@ -106,7 +108,7 @@
             width: 8px;
             height: 8px;
             opacity: 1;
-            border-color: var(--accentColor);
+            border-color: var(--warningColor);
         }
         100% {
         top: 0;
