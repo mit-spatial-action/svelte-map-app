@@ -94,4 +94,8 @@ $: add = (gcResult) ? parseContext(gcResult) : undefined;
     #address {
         z-index: 40;
     }
+    
+    div {
+        z-index: 20;
+    }
 </style>
