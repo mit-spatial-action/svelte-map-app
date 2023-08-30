@@ -3,7 +3,7 @@
     import { fade, fly } from 'svelte/transition';
 
     export let duration = 1.2;
-    export let border = 3;
+    export let border = 4;
     import site_data from '$lib/config/instance.json';
     export let primaryColor = site_data.primaryColor;
     export let warningColor = site_data.warningColor;
@@ -12,7 +12,7 @@
         "duration": 500,
         "distance": 150
     };
-	export let denom = 6;
+	export let denom = 4;
     const steps = Array.from(Array(denom - 1), (_, i) => i + 1)
 
 </script>
@@ -82,7 +82,6 @@
         left: 30px;
         width: 20px;
         height: 20px;
-        border: 0px solid #000;
     }
 
     @keyframes ripple {
@@ -91,15 +90,15 @@
             left: 36px;
             width: 8px;
             height: 8px;
-            opacity: 0;
+            opacity: 0.8;
             border-color: var(--warningColor);
         }
-        4.9% {
+        10% {
             top: 36px;
             left: 36px;
             width: 8px;
             height: 8px;
-            opacity: 0;
+            opacity: 0.8;
             border-color: var(--warningColor);
         }
         15% {
@@ -107,16 +106,16 @@
             left: 36px;
             width: 8px;
             height: 8px;
-            opacity: 1;
+            opacity: 0.8;
             border-color: var(--warningColor);
         }
         100% {
-        top: 0;
-        left: 0;
-        width: 80px;
-        height: 80px;
-        opacity: 0;
-        border-color: var(--primaryColor);
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 80px;
+            opacity: 0.5;
+            border-color: var(--primaryColor);
         }
     }
 </style>
