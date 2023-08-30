@@ -9,3 +9,4 @@ node_modules
 .npmrc
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+src/styles/style.css
