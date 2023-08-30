@@ -1,13 +1,18 @@
 <script>
   import Hamburger from './Hamburger.svelte';
   import NavbarItem from './NavbarItem.svelte';
+  import site_data from '$lib/config/instance.json';
   export let pages;
 </script>
 
-<nav class="navbar is-fixed-top">
-    <div class="container">
-      <Hamburger/>
-      <div id="navMenu" class="navbar-menu">
+<nav class="navbar is-fixed-top has-background-dark">
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <img alt="Logo" src="{site_data.logo}"/>
+        </div>
+        <Hamburger/>
+      </div>
+      <div id="navMenu" class="navbar-menu has-background-dark">
         <div class="navbar-start">
         {#if pages}
           {#each Object.entries(pages) as [name, path]}
@@ -16,5 +21,4 @@
         {/if}
         </div>
       </div>
-    </div>
 </nav>
