@@ -1,7 +1,8 @@
 {
-    "appTitle": "Siting Solar",
-    "appDescription": "This mapping tool reflects currently available data geographic eligibility for the Inflation Reduction Act Low-Income Communities Bonus Credit Program.",
+    "title": "Siting Solar",
+    "description": "This mapping tool reflects currently available data geographic eligibility for the Inflation Reduction Act Low-Income Communities Bonus Credit Program.",
     "logo": "https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500927478729-Z0V8SX4DQTPDMRY2D0TX/RE_Logo_MdText_Yellow_crop-01.png?format=1500w",
+    "favicon": "https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500913866446-5OE5FYG4545FJGUF00IE/favicon.ico",
     "authors": [{
         "name": "Eric Robsky Huntley, PhD",
         "location": "Cambridge, MA",

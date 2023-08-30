@@ -49,10 +49,6 @@ html {
   filter: drop-shadow(.18rem .18rem 0rem $danger-dark);
 }
 
-.info-box > * {
-  z-index: 20;
-}
-
 $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1532030351639-5C2Q8FQP0YTY8E5XUUO1/Ephiphany+School+1.jpg');
 @each $key, $image in $backgrounds {
   .hero-#{$key} {
@@ -77,25 +73,6 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   width: 100vw;
   position: fixed;
   top: calc(#{$navbar-height});
-  // left: 0;
-  // min-height: calc(100vh - (#{$navbar-height}));
-  // max-height: calc(100vh - (#{$navbar-height}));
-  // height: calc(100vh - (#{$navbar-height}));
-}
-
-// .sticky-top {
-//   position: sticky; 
-//   top: calc(#{$navbar-height} + 5rem);
-// }
-
-// @media only screen and (max-device-width : 480px) {
-//   .info-box {
-//     top: calc(#{$navbar-height} + 5rem);
-//   }
-// }
-
-.button {
-  border: none;
 }
 
 @include mobile {

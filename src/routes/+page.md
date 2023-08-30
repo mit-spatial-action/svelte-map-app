@@ -2,10 +2,9 @@
 title: "Home"
 ---
 
-<section class="hero is-fullheight-with-navbar">
-    <div class="hero-body">
-        <p class="title">
-            The Inflation Reduction Act, or IRA, is making it easier for you to build renewable energy.
-        </p>
-    </div>
-</section>
+<script>
+    import HeroFullHeight from '$lib/components/HeroFullHeight.svelte';
+    import site_data from '$lib/config/instance.json';
+</script>
+
+<HeroFullHeight title={site_data.title} subtitle={site_data.description} authors={site_data.authors} orgs ={site_data.orgs}/>
