@@ -1,12 +1,10 @@
 <script>
-    import Map from '$lib/Map/Map.svelte'
-    import d from '$lib/config/instance.json'
+    import Map from '$lib/components/Map/Map.svelte';
     /** @type {import('./$types').PageData} */
     export let data
 </script>
 <section>
     <Map 
         mapbox_token={data.mapbox_token}
-        >
-    </Map>
+    />
 </section>

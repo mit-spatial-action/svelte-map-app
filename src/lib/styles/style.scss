@@ -3,18 +3,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import 'colors';
 
 $family-sans-serif: 'Figtree', sans-serif;
 $column-gap: 0.75rem;
-
-// @import '$lib/config/instance.json';
-
-// $dark: #363636;
-$primary: #f0a800;
-$success: #177E8A;
-$link: #f0a800;
-$danger: #d63088;
-$body-background-color: hsl(0, 0%, 21%);
 
 @import "../../node_modules/bulma/sass/utilities/_all.sass";
 @import "../../node_modules/bulma/sass/base/_all.sass";
@@ -51,21 +43,12 @@ html {
 
 $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1532030351639-5C2Q8FQP0YTY8E5XUUO1/Ephiphany+School+1.jpg');
 @each $key, $image in $backgrounds {
-  .hero-#{$key} {
+  .hero-#{$key}, .page-bg {
     @extend .hero;
     background-image: url(#{$image});
     background-size: cover;
     background-position: center;
   }
-}
-
-.is-fullheight {
-  min-height: calc(100vh - (#{$navbar-height}));
-  max-height: calc(100vh - (#{$navbar-height}));
-  height: calc(100vh - (#{$navbar-height}));
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
 }
 
 #map {
@@ -90,3 +73,4 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
     margin-top: calc(36px + 1.5rem);
   }
 }
+

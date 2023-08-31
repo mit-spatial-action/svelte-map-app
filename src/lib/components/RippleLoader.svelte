@@ -4,9 +4,6 @@
 
     export let duration = 1.2;
     export let border = 4;
-    import site_data from '$lib/config/instance.json';
-    export let primaryColor = site_data.primaryColor;
-    export let warningColor = site_data.warningColor;
     
     export let flyInProps = {
         "duration": 500,
@@ -25,19 +22,16 @@
         }} class="rippler">
         {#each steps as step}
             <div class="ripple-wave" style="
-            --warningColor: {warningColor}; 
-            --primaryColor: {primaryColor}; 
             --duration: {duration}; 
             --border: {border};
             animation-delay: -{ step * duration / denom}s;"/>
         {/each}
-        <div class="circle-core" style="
-        --warningColor: {warningColor};"/>
+        <div class="circle-core"/>
     </div>
 </div>
 {/if}
 
-<style>
+<style lang="scss">
     .wrapper {
 		display: flex;
 		flex-direction: column;
@@ -77,7 +71,7 @@
     }
 
     .rippler .circle-core {
-        background: var(--warningColor);
+        background: $danger;
         top: 30px;
         left: 30px;
         width: 20px;
@@ -91,7 +85,7 @@
             width: 8px;
             height: 8px;
             opacity: 0.8;
-            border-color: var(--warningColor);
+            border-color: $danger;
         }
         10% {
             top: 36px;
@@ -99,7 +93,7 @@
             width: 8px;
             height: 8px;
             opacity: 0.8;
-            border-color: var(--warningColor);
+            border-color: $danger;
         }
         15% {
             top: 36px;
@@ -107,7 +101,7 @@
             width: 8px;
             height: 8px;
             opacity: 0.8;
-            border-color: var(--warningColor);
+            border-color: $danger;
         }
         100% {
             top: 0;
@@ -115,7 +109,7 @@
             width: 80px;
             height: 80px;
             opacity: 0.5;
-            border-color: var(--primaryColor);
+            border-color: $primary;
         }
     }
 </style>

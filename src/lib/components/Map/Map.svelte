@@ -6,11 +6,13 @@
     import Marker from '$lib/components/Map/Marker.svelte';
     import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
     import RippleLoader from '$lib/components/RippleLoader.svelte';
-    
+    // import site_data from '$lib/config/instance.json';
+
+    // @import '$lib/styles/_variables.scss';
+
     import 'mapbox-gl/dist/mapbox-gl.css';
 
     import { mapbox, key } from '$lib/scripts/utils';
-
 
     import Device from 'svelte-device-info';
     let mobile;
@@ -91,7 +93,7 @@
                             property: 'how_many',
                             stops: [[1, 0.5], [2, 1]]
                         },
-                        'fill-color': '#177E8A',
+                        'fill-color': "#177E8A",
                         'fill-outline-color': 'white',
                     }
                 }

@@ -26,9 +26,6 @@
         "Documentation": "documentation"
     },
     "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
-    "primaryColor": "#f0a800",
-    "warningColor": "#d63088",
-    "linkColor": "#f0a800",
     "map": {
         "style": "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy",
         "maxBounds": [
