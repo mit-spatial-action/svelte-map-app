@@ -1,1 +1,1 @@
-<a class="button mb-3 is-fullwidth has-background-primary has-text-dark has-text-weight-bold shadow" href="/map">Where Can I Build?</a>
+<a class="button mb-3 is-fullwidth has-background-primary has-text-dark has-text-weight-bold shadow" href="/map">Explore the Data</a>

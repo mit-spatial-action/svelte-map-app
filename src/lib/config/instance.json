@@ -1,24 +1,24 @@
 {
-    "title": "Siting Solar",
-    "description": "This mapping tool reflects currently available data geographic eligibility for the Inflation Reduction Act Low-Income Communities Bonus Credit Program.",
-    "logo": "https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500927478729-Z0V8SX4DQTPDMRY2D0TX/RE_Logo_MdText_Yellow_crop-01.png?format=1500w",
-    "favicon": "https://images.squarespace-cdn.com/content/v1/56fbfd2d37013b142d331d72/1500913866446-5OE5FYG4545FJGUF00IE/favicon.ico",
+    "title": "Mass Evictions",
+    "description": "A record of Massachusetts court eviction filings from 02/2019 to 09/2022",
+    "logo": "https://dusp.mit.edu/themes/basis/images/logo.svg",
+    "favicon": "https://dusp.mit.edu/themes/basis/images/logo.svg",
     "authors": [{
         "name": "Eric Robsky Huntley, PhD",
         "location": "Cambridge, MA",
         "role": "Design, Development, and Research",
         "url": "https://dusp.mit.edu/people/eric-robsky-huntley"
     }, {
-        "name": "Kit TeSelle",
-        "affiliation": "Resonant Energy",
+        "name": "First Name Last Name ",
+        "affiliation": "MIT DUSP",
         "role": "Research",
-        "url": "https://www.resonant.energy/staff/"
+        "url": "https://dusp.mit.edu/people/eric-robsky-huntley"
     }
     ],
     "orgs": [{
-        "name": "Resonant Energy",
+        "name": "MIT Department of Urban Studies and Planning",
         "url": "https://resonant.Energy",
-        "description": "a Boston-based solar provider with a mission to build wealth in Environmental Justice communities through solar power"
+        "description": "Temporary placeholder description"
     }],
     "pages": {
         "Home": "/",
@@ -36,9 +36,9 @@
         "singleMarker": true,
         "projection": "globe",
         "init": {
-            "lngLat": [-120, 42],
-            "zoom": [1.8, 3],
-            "zoomDur": 3000
+            "lngLat": [-71.89, 42.34],
+            "zoom": [5, 8],
+            "zoomDur": 5000
         }
     }
 }

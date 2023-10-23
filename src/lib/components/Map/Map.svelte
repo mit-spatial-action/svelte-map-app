@@ -6,7 +6,7 @@
     import Marker from '$lib/components/Map/Marker.svelte';
     import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
     import RippleLoader from '$lib/components/RippleLoader.svelte';
-    // import site_data from '$lib/config/instance.json';
+    import site_data from '$lib/config/instance.json';
 
     // @import '$lib/styles/_variables.scss';
 
@@ -22,9 +22,9 @@
 
     export let style =  "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy";
     export let projection = 'globe';
-    export let initLngLat = [-120, 42];
+    export let initLngLat = site_data.map.init.lngLat;
     initLngLat = new mapbox.LngLat(initLngLat[0], initLngLat[1])
-    export let initZoom = [2, 4];
+    export let initZoom = site_data.map.init.zoom;
     export let initZoomDur  = 3000;
     
     export let maxBounds = [
@@ -192,7 +192,7 @@
         };
     });
 </script>
-
+<InfoPanel bind:marker bind:gcResult bind:selected/>
 <div id ="map" class={(selected !== undefined && mobile) ? 'non-interactive' : null} bind:this={container}>
     {#if map}
         <RippleLoader bind:loadingState />
@@ -202,7 +202,7 @@
         <SelectedGeometry bind:selected bind:lngLat bind:loadingState/>
     {/if}
 </div>
-<InfoPanel bind:marker bind:gcResult bind:selected/>
+
 
 <style>
     .non-interactive {

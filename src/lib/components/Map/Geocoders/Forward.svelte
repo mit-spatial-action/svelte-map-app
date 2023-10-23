@@ -28,7 +28,7 @@
 
 
     onMount(() => {
-        map.addControl(geocoder, 'top-left');
+        map.addControl(geocoder, 'top-right');
         if (mobile) {
             geocoder.on('clear', (e) => {
                 gcResult = undefined;

@@ -1,12 +1,54 @@
 <script>
     import LowIncome from '$lib/components/InfoPanel/LowIncome.svelte';
     import EnergyCommunities from '$lib/components/InfoPanel/EnergyCommunities.svelte';
+    import Tabs from '$lib/components/InfoPanel/Tabs.svelte';
 
     import { slide } from 'svelte/transition';
 
     export let gcResult;
     export let selected;
     export let marker;
+
+    //From Low income Component
+    $: items = [
+            {
+                desc: "Top Statistics",
+                true: true,
+                text: "temp1",
+                citation: 'U.S. Census Bureau. 2016-2020. "Poverty Status by Sex by Age (Table B17001)." <em>American Community Survey 5-Year Estimates</em>. Downloaded using the <code>tidycensus</code> R package.'
+            },
+            {
+                desc: "Random Evictor",
+                true: true,
+                text: "temp2",
+                citation: 'U.S. Census Bureau. 2016-2020. "Median Family Income (Table B19113)." <em>American Community Survey 5-Year Estimates</em>. Downloaded using the <code>tidycensus</code> R package.'
+            },
+            {
+                desc: "Eviction Primer",
+                true: true,
+                text: "temp3",
+                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
+            },
+            {
+                desc: "What happeneds in court?",
+                true: true,
+                text: "temp4",
+                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
+            },
+            {
+                desc: "Reports",
+                true: true,
+                text: "temp5",
+                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
+            },
+            {
+                desc: "Gallery",
+                true: true,
+                text: "temp6",
+                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
+            },
+        ]
+
 
     function closeInfo() {
         marker.remove();
@@ -59,7 +101,7 @@ $: add = (gcResult) ? parseContext(gcResult) : undefined;
 
 {#if add || selected }
 <div class="info-box columns p-3">
-    <div transition:slide = {{ duration: 500, axis: 'y'}} class="column is-offset-three-fifths is-two-fifths">
+    <div transition:slide = {{ duration: 500, axis: 'y'}} class="column is-two-fifths">
         <div id="address" class="box block has-background-grey-darker shadow sticky-top">
             <button on:click={closeInfo} class="button span tag icon-text is-danger shadow is-medium block">
                 <span>Close</span>
@@ -88,7 +130,24 @@ $: add = (gcResult) ? parseContext(gcResult) : undefined;
         {/if}
     </div>
 </div>
+{:else}
+<div class="info-box columns p-3">
+    <div transition:slide = {{ duration: 500, axis: 'y'}} class="column is-two-fifths">
+        <div id="address" class="box block has-background-grey-darker shadow sticky-top title has-text-white">
 
+        <p>MASS EVICTIONS</p>
+        <br/>
+        <h6>A record of Massachusetts court eviction filings from 02/2019 to 09/2022</h6>
+        <br/>
+
+        <Tabs {items}/>
+        
+        
+        </div>
+        
+    </div>
+    
+</div>
 {/if}
 <style>
     #address {
