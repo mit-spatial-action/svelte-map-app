@@ -1,5 +1,10 @@
 # svelte-map-app
 
+## New branch for mass evictions mockup 
+This mass evictions mockup builds on the Svelte template. The October 2023 proof of concept includes hard-coded components. 
+
+## Template overview
+
 <img width="1333" alt="screenshot" src="https://github.com/Unnamed-Lab-DUSP/svelte-map-app/assets/10646361/1bb15da4-d70e-4a84-8349-9d8cb00fef13">
 
 This is a simple templated mapping application, built using Svelte, SvelteKit, Node, Bulma, and Mapbox that can be easily customized using the fields in `src/config/instance.json`. It includes basic, but common, documentation pages, which can be written in markdown, and the map allows the user to select locations using click events or forward geocoding, which populate a bare-bones info panel.
