@@ -5,14 +5,14 @@
   export let pages;
 </script>
 
-<nav class="navbar is-fixed-top has-background-dark">
+<nav class="navbar is-fixed-top has-background-light shadow">
       <div class="navbar-brand">
         <div class="navbar-item">
           <img alt="Logo" src="{site_data.logo}"/>
         </div>
         <Hamburger/>
       </div>
-      <div id="navMenu" class="navbar-menu has-background-dark">
+      <div id="navMenu" class="navbar-menu has-background-light">
         <div class="navbar-start">
         {#if pages}
           {#each Object.entries(pages) as [name, path]}

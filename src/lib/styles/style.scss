@@ -57,6 +57,10 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   top: calc(#{$navbar-height});
 }
 
+.homepage { 
+  height: 100vh;
+}
+
 @include mobile {
   .mapboxgl-ctrl-top-left {
     right: 0;
@@ -72,4 +76,3 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
     margin-top: calc(36px + 1.5rem);
   }
 }
-

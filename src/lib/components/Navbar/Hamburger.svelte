@@ -5,7 +5,7 @@
     }
 </script>
 
-<button on:click={handleClick} class="navbar-burger has-text-white" aria-label="menu" aria-expanded="false" data-target="navMenu">
+<button on:click={handleClick} class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
     <span aria-hidden="true"></span>
