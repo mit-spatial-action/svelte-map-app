@@ -4,7 +4,7 @@
     import ReverseGeocoder from '$lib/components/Map/Geocoders/Reverse.svelte';
     import SelectedGeometry from '$lib/components/Map/SelectedGeometry.svelte';
     import Marker from '$lib/components/Map/Marker.svelte';
-    import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
+    //import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
     import RippleLoader from '$lib/components/RippleLoader.svelte';
     import site_data from '$lib/config/instance.json';
 
@@ -192,7 +192,6 @@
         };
     });
 </script>
-<InfoPanel bind:marker bind:gcResult bind:selected/>
 <div id ="map" class={(selected !== undefined && mobile) ? 'non-interactive' : null} bind:this={container}>
     {#if map}
         <RippleLoader bind:loadingState />

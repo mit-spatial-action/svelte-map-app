@@ -27,6 +27,7 @@
                 </div>
             
                 <div class="column homepage has-background-light no-scroll">
+                    <Map />
                 </div>
             </div>
     </div>
