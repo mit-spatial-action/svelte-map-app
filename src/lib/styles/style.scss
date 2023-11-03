@@ -76,3 +76,10 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
     margin-top: calc(36px + 1.5rem);
   }
 }
+
+.menu-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+}

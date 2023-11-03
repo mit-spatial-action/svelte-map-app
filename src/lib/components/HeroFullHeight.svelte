@@ -3,7 +3,11 @@
     import { onMount } from 'svelte';
     import { slide, fade } from 'svelte/transition';
     import Map from '$lib/components/Map/Map.svelte';
+    import SearchBar from '$lib/components/SearchBar.svelte';
+     /** @type {import('./$types').PageData} */
     
+    export let token
+
     export let title = "Title";
     export let subtitle = "Longer description";
     let loadState = false;
@@ -11,7 +15,7 @@
 </script>
 
 {#if loadState}
-<section class="hero-solar is-fullheight-with-navbar">
+
     <div class="container">
             <div class="columns no-scroll">
             <div class="column homepage has-background-light is-half shadow">
@@ -22,14 +26,14 @@
                      {subtitle}
                 </p>
                 <div>
-                    <WelcomeButton/>
+                    <SearchBar/>
                 </div>
                 </div>
             
                 <div class="column homepage has-background-light no-scroll">
-                    <Map />
+                    <Map mapbox_token={token}/>
                 </div>
             </div>
     </div>
-</section>
+
 {/if}

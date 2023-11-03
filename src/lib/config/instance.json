@@ -22,8 +22,13 @@
     }],
     "pages": {
         "Home": "/",
-        "Map": "map",
-        "Documentation": "documentation"
+        "Documentation": "documentation",
+        "Eviction Statistics": "eviction-statistics",
+        "See a Random Evictor": "random-evictor",
+        "Gallery": "gallery",
+        "Links and Info": "info", 
+        "About": "about",
+        "Contact": "contact"
     },
     "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
     "map": {
