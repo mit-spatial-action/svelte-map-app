@@ -12,6 +12,12 @@
     export let subtitle = "Longer description";
     let loadState = false;
     onMount(() => loadState = true);
+
+    function handleSearch(event) {
+        const searchTerm = event.detail;
+        // TODO: add logic to update the map based on the search term
+    }
+
 </script>
 
 {#if loadState}
@@ -26,7 +32,7 @@
                      {subtitle}
                 </p>
                 <div>
-                    <SearchBar/>
+                    <SearchBar on:search={handleSearch} />
                 </div>
                 </div>
             
