@@ -6,4 +6,4 @@
 <title>{site_data.title}</title>
 <link rel="icon" type="image/x-icon" href={site_data.favicon}>
 <Navbar pages={site_data.pages}/>
-<slot />
+<slot/>
