@@ -36,7 +36,7 @@
                 </div>
                 </div>
             
-                <div class="column homepage has-background-light no-scroll">
+                <div class="column homepage  has-background-light no-scroll">
                     <Map mapbox_token={token}/>
                 </div>
             </div>

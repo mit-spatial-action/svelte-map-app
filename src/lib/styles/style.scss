@@ -52,8 +52,8 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
 
 #map {
   height: calc(100vh - (#{$navbar-height}));
-  width: 100vw;
   position: fixed;
+  width: 60vw;
   top: calc(#{$navbar-height});
 }
 
@@ -77,9 +77,8 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   }
 }
 
-.menu-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
+.container {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100vw;
 }
