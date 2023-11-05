@@ -1,5 +1,4 @@
 <script>
-    import HeroFullHeight from '$lib/components/HeroFullHeight.svelte';   
     import HomePanel from '$lib/components/InfoPanel/HomePanel.svelte';
 
     import site_data from '$lib/config/instance.json';

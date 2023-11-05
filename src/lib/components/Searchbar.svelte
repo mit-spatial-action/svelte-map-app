@@ -1,4 +1,7 @@
 <script>
+    //import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+   //import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+    
     let searchText = '';
 
     import { createEventDispatcher } from 'svelte';
@@ -18,3 +21,5 @@
         <button class="button is-info" on:click={handleSearch}>Search</button>
     </div>
   </div>
+
+  <div id="geocoder"></div>

@@ -1,6 +1,7 @@
 <script>
     import { onDestroy, onMount, setContext } from 'svelte';
     import ForwardGeocoder from '$lib/components/Map/Geocoders/Forward.svelte';
+    import SearchGeocoder from '$lib/components/Map/Geocoders/SearchCombined.svelte';
     import ReverseGeocoder from '$lib/components/Map/Geocoders/Reverse.svelte';
     import SelectedGeometry from '$lib/components/Map/SelectedGeometry.svelte';
     import Marker from '$lib/components/Map/Marker.svelte';
@@ -191,6 +192,9 @@
              map.remove()
         };
     });
+
+   // document.getElementById('search-geocoder').appendChild(search-geocoder.onAdd(map));
+
 </script>
 <div id ="map" class={(selected !== undefined && mobile) ? 'non-interactive' : null} bind:this={container}>
     {#if map}
@@ -198,9 +202,11 @@
         <Marker bind:lngLat bind:marker />
         <ReverseGeocoder bind:lngLat bind:gcResult />
         <ForwardGeocoder bind:lngLat bind:gcResult bind:selected />
+        <SearchGeocoder bind:lngLat bind:gcResult bind:selected />
         <SelectedGeometry bind:selected bind:lngLat bind:loadingState/>
     {/if}
 </div>
+
 
 
 <style>
