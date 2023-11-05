@@ -1,6 +1,6 @@
 {
-    "title": "Mass Evictions",
-    "description": "A record of Massachusetts court eviction filings from 02/2019 to 09/2022",
+    "title": "MASS EVICTIONS",
+    "description": "Massachusetts court eviction filings from Feb. 2019 to Sept. 2022",
     "logo": "https://dusp.mit.edu/themes/basis/images/logo.svg",
     "favicon": "https://dusp.mit.edu/themes/basis/images/logo.svg",
     "authors": [{
@@ -30,7 +30,7 @@
         "About": "about",
         "Contact": "contact"
     },
-    "keywords": ["solar", "energy", "Inflation Reduction Act", "IRA", "mapping"],
+    "keywords": ["evictions", "mapping"],
     "map": {
         "style": "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy",
         "maxBounds": [

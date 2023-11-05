@@ -13,13 +13,13 @@
 
   </script>
 
-<div class="field has-addons">
+<!-- <div class="field has-addons">
     <div class="control">
       <input class="input" type="text" placeholder="e.g. Corp name or address..." bind:value={searchText}>
     </div>
     <div class="control">
         <button class="button is-info" on:click={handleSearch}>Search</button>
     </div>
-  </div>
+  </div> -->
 
   <div id="geocoder"></div>

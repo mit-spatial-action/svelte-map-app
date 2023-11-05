@@ -17,13 +17,13 @@
 {#if loadState}
 
     <div>
-        <p class="title has-text-dark is-size-1">
+        <div class="title has-text-dark is-size-1 has-text-centered">
             {title}
-        </p>
-        <p class="subtitle mt-1 has-text-dark is-size-2">
+        </div>
+        <div class="subtitle mt-1 has-text-dark is-size-6 has-text-centered">
                 {subtitle}
-        </p>
-        <div>
+        </div>
+        <div class="centered">
             <SearchBar on:search={handleSearch} />
         </div>
     </div>

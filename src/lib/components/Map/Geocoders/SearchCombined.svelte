@@ -23,6 +23,7 @@
         mapboxgl: mapbox,
         countries: 'us',
         types: 'address,poi',
+        placeholder: 'Corp. Name or Address',
         marker: false
     });
 
