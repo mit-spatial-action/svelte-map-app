@@ -1,0 +1,115 @@
+{
+    "type": "geojson",
+    "data": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+            "type": "Feature",
+            "properties": {
+            "code_violations": 0,
+            "eviction-filing-type": "dXJuOm1ieGFkcjplZGE4NGIyZC1iZmY1LTQ1YmEtOWU4NS0wMjZhNDBiMzI4MzA",
+            "place_name": "31 Dudley Street, Boston, Massachusetts 02119, United States",
+            "public_funding": 0,
+            "corporate_addresses": [
+                "1 Beacon Street Boston MA",
+                "1495 Hancock Street, Quincy MA"
+            ],
+            "landlord_name": "Helge Capital, Inc.",
+            "mapbox_id": "dXJuOm1ieGFkcjplZGE4NGIyZC1iZmY1LTQ1YmEtOWU4NS0wMjZhNDBiMzI4MzA",
+            "eviction_rank": 3,
+            "evictions": 263,
+            "num_units": 150,
+            "accuracy": "interpolated",
+            "other_names": [
+                "GBM Portfolio Owner LLC",
+                "Helge Esmond LLC",
+                "Twelve ALH LLC",
+                "Mean Evictor LLC"
+            ]
+            },
+            "geometry": {
+            "coordinates": [
+                -71.087218,
+                42.329201
+            ],
+            "type": "Point"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+            "code_violations": "28",
+            "eviction-filing-type": {
+                "no-cause": 83,
+                "cause": 12,
+                "non-payment": 6
+            },
+            "place_name": "21r Dane Avenue, Somerville, Massachusetts 02143, United States",
+            "public_funding": 0,
+            "corporate_addresses": [
+                "72 North Water Street, New Bedford, MA",
+                "5 Archers Way, Acushnet, MA"
+            ],
+            "landlord_name": "Oliviera Investment Inc",
+            "mapbox_id": "dXJuOm1ieGFkcjphMTYwOWYwNy1iZjdhLTRhOWYtYWI1OC0wOWYwYWZkOGJlM2E",
+            "eviction_rank": 15,
+            "evictions": 116,
+            "num_units": 52,
+            "accuracy": "rooftop",
+            "other_names": [
+                "NFT Reality, LLC",
+                "Edron LLC"
+            ]
+            },
+            "geometry": {
+            "coordinates": [
+                -71.10365,
+                42.38015
+            ],
+            "type": "Point"
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+            "code_violations": 324,
+            "eviction-filing-type": {
+                "no-cause": 3,
+                "cause": 3,
+                "non-payment": 93
+            },
+            "place_name": "14 Dorchester Avenue, Boston, Massachusetts 02127, United States",
+            "public_funding": 1037541,
+            "corporate_addresses": [
+                "60 Leo Birmingham Parkway, Brighton MA",
+                "172 Sawyer Ave, Swansea MA",
+                "14 Dorchester Avenue, Boston, MA",
+                "40 Ibbetson Street Somerville MA",
+                "1 Main Street Cambridge MA"
+            ],
+            "landlord_name": "Samia Companies LLC",
+            "mapbox_id": "dXJuOm1ieGFkcjo0MGEyZjMyOS04YzBkLTQyNjAtOTNmYS04MjgwODIyNmY2Nzk",
+            "eviction_rank": 21,
+            "evictions": 308,
+            "num_units": 2500,
+            "accuracy": "interpolated",
+            "other_names": [
+                "Saint Joseph LJ5 LLC",
+                "Fall River LJ5 LLC",
+                "Riverway LJ5 LLC Mass LLC",
+                "Mean Evictor MA LLC",
+                "Land Overlord LLC"
+            ]
+            },
+            "geometry": {
+            "coordinates": [
+                -71.052934,
+                42.351267
+            ],
+            "type": "Point"
+            }
+        }]
+    }
+}
+
+

@@ -87,6 +87,8 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   font-size: 58px;
 }
 
+
+//TODO: Revisit and recreate w/ BULMA defaults
 #left-panel{
   display: flex;
   flex-direction: column;
@@ -94,7 +96,7 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   justify-content: center;
 }
 
-#geocoder{
+#geocoder{  
   display: flex;
   justify-content: center;
 }

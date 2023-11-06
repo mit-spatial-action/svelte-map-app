@@ -14,6 +14,7 @@
     import 'mapbox-gl/dist/mapbox-gl.css';
 
     import { mapbox, key } from '$lib/scripts/utils';
+   // import Evictions from '$lib/config/SampleEvictions.geojson';
 
     import Device from 'svelte-device-info';
     let mobile;
@@ -21,7 +22,7 @@
     export let mapbox_token;
     mapbox.accessToken = mapbox_token;
 
-    export let style =  "mapbox://styles/ericrobskyhuntley/cljrocy4m017701pa1j212ahy";
+    export let style =  "mapbox://styles/milanc/clomi1wzb006v01qnahsi5vlc";
     export let projection = 'globe';
     export let initLngLat = site_data.map.init.lngLat;
     initLngLat = new mapbox.LngLat(initLngLat[0], initLngLat[1])
@@ -75,88 +76,28 @@
         map = new mapbox.Map(mapOptions);
         
         map.on ('load', () => {
-            map.addSource('adders', {
+            map.addSource('sample-evictions', {
                 type: 'vector',
-                url: 'mapbox://ericrobskyhuntley.3tqai42w'
+                url: "mapbox://milanc.clom235b6a6z52alkp94hemh3-6pw18"
             });
-            map.addSource('choropleth', {
-                type: 'vector',
-                url: 'mapbox://ericrobskyhuntley.b3m8uynm'
-            })
             map.addLayer(
                 {
-                    id: 'choropleth-fill',
-                    type: 'fill',
-                    source: 'choropleth',
-                    'source-layer': 'resonant_overlay-3wot0h',
+                    id:"evictions", 
+                    source: "sample-evictions",
+                    'source-layer': "Sample-Evictions",
+                    type: "circle",
                     paint: {
-                        'fill-opacity': {
-                            property: 'how_many',
-                            stops: [[1, 0.5], [2, 1]]
-                        },
-                        'fill-color': "#177E8A",
-                        'fill-outline-color': 'white',
+                        'circle-radius': [
+                            "interpolate",
+                            ["linear"],
+                            ["get", "evictions"],
+                            0, 0,
+                            400, 30],
+                        'circle-color': '#FF5F05',
+                        'circle-opacity': 0.7
+                        }
                     }
-                }
             )
-            map.addLayer(
-                {
-                    id: "adders-shadow",
-                    source: "adders",
-                    "source-layer": "adders_dissolved-2x5v3w",
-                    type: "line",
-                    "line-join": "bevel",
-                    "line-cap": "round",
-                    paint: {
-                        "line-color": "#000000",
-                        "line-opacity": 1,
-                        "line-width": 2,
-                        "line-translate": [2,2]
-                    }
-                }
-            )
-            map.addLayer(
-                {
-                    id: 'adders-outlines',
-                    source: 'adders',
-                    'source-layer': 'adders_dissolved-2x5v3w',
-                    type: 'line',
-                    paint: {
-                        'line-color': '#f0a800',
-                        'line-width': 2,
-                    }
-                }
-            )
-            map.addLayer(
-                {
-                    id: 'adders-fill',
-                    type: 'fill',
-                    source: 'adders',
-                    'source-layer': 'adders_dissolved-2x5v3w',
-                    paint: {
-                        'fill-color': '#f0a800'
-                    }
-                }
-            )
-            map.moveLayer('choropleth-fill', 'waterway');
-            map.setPaintProperty('adders-fill', 'fill-opacity', [
-                'interpolate',
-                ['exponential', 0.5],
-                ['zoom'],
-                initZoom[1],
-                0,
-                resultZoom,
-                0.1
-            ])
-            map.setPaintProperty('adders-shadow', 'line-width', [
-                'interpolate',
-                ['linear', 0.5],
-                ['zoom'],
-                initZoom[1],
-                1,
-                resultZoom,
-                3
-            ])
         })
         map.once('zoomend', () => {
             loadingState = !loadingState
@@ -174,8 +115,6 @@
                 'space-color': '#000000', 
                 'star-intensity': 0.1
             })
-
-
             if (initZoom.length === 2) {
                 map.flyTo({
                     center: initLngLat,
@@ -193,15 +132,12 @@
         };
     });
 
-   // document.getElementById('search-geocoder').appendChild(search-geocoder.onAdd(map));
-
 </script>
 <div id ="map" class={(selected !== undefined && mobile) ? 'non-interactive' : null} bind:this={container}>
     {#if map}
         <RippleLoader bind:loadingState />
         <Marker bind:lngLat bind:marker />
         <ReverseGeocoder bind:lngLat bind:gcResult />
-        <ForwardGeocoder bind:lngLat bind:gcResult bind:selected />
         <SearchGeocoder bind:lngLat bind:gcResult bind:selected />
         <SelectedGeometry bind:selected bind:lngLat bind:loadingState/>
     {/if}

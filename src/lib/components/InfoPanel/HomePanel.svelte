@@ -13,6 +13,28 @@
         // TODO: add logic to update the map based on the search term
     }
 
+    //Home page tab button names
+       $: items = [
+            {
+                desc: "Top Statistics",
+             },
+            {
+                desc: "Random Evictor",
+            },
+            {
+                desc: "Eviction Primer",
+            },
+            {
+                desc: "What happeneds in court?",
+            },
+            {
+                desc: "Reports",
+            },
+            {
+                desc: "Gallery",
+            },
+        ]
+
 </script>
 {#if loadState}
 

@@ -13,40 +13,21 @@
     $: items = [
             {
                 desc: "Top Statistics",
-                true: true,
-                text: "temp1",
-                citation: 'U.S. Census Bureau. 2016-2020. "Poverty Status by Sex by Age (Table B17001)." <em>American Community Survey 5-Year Estimates</em>. Downloaded using the <code>tidycensus</code> R package.'
-            },
+             },
             {
                 desc: "Random Evictor",
-                true: true,
-                text: "temp2",
-                citation: 'U.S. Census Bureau. 2016-2020. "Median Family Income (Table B19113)." <em>American Community Survey 5-Year Estimates</em>. Downloaded using the <code>tidycensus</code> R package.'
             },
             {
                 desc: "Eviction Primer",
-                true: true,
-                text: "temp3",
-                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
             },
             {
                 desc: "What happeneds in court?",
-                true: true,
-                text: "temp4",
-                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
             },
             {
                 desc: "Reports",
-                true: true,
-                text: "temp5",
-                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
             },
             {
                 desc: "Gallery",
-                true: true,
-                text: "temp6",
-                citation: 'U.S. Census Bureau. 2020. <em>American Indian/Alaska Native/Native Hawaiian Areas</em>. Downloaded using the <code>tigris</code> R package.'
-            },
         ]
 
 
