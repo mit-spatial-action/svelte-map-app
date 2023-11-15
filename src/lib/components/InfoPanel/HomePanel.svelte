@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import SearchBar from '$lib/components/SearchBar.svelte';
+    import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
      /** @type {import('./$types').PageData} */
      import { getContext } from 'svelte';
 
@@ -56,10 +57,7 @@
     </div>
     {/if}
     {#if $selectedFeature.length >= 1}
-        <div class="subtitle mt-1 has-text-dark is-size-6 has-text-centered">
-            { $selectedFeature[0].properties.landlord_name }
-        </div>
-
+       <InfoPanel/>
     {/if}
 {/if}
 
