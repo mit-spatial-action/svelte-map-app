@@ -106,6 +106,30 @@
         map.on('style.load', () => {
             map.on('click', (e) => {
                 lngLat = e.lngLat;
+
+                var features = map.queryRenderedFeatures(e.point, { layers: ['sample-evictions'] });
+                if (!features.length) {
+                    return;
+                }
+                if (typeof map.getLayer('selectedGeom') !== "undefined" ){         
+                    map.removeLayer('selectedGeom')
+                    map.removeSource('selectedGeom');   
+                }
+                var feature = features[0];
+                map.addSource('selectedGeom', {
+                    "type":"geojson",
+                    "data": feature.toJSON()
+                });
+                map.addLayer({
+                    "id": "selectedGeom",
+                    "type": "line",
+                    "source": "selectedGeom",
+                    "paint": {
+                        "line-color": "yellow",
+                        "line-width": 8
+                    }
+        });
+
             })
             map.setFog({
                 range: [9,20],
@@ -136,7 +160,6 @@
 <div id ="map" class={(selected !== undefined && mobile) ? 'non-interactive' : null} bind:this={container}>
     {#if map}
         <RippleLoader bind:loadingState />
-        <Marker bind:lngLat bind:marker />
         <ReverseGeocoder bind:lngLat bind:gcResult />
         <SearchGeocoder bind:lngLat bind:gcResult bind:selected />
         <SelectedGeometry bind:selected bind:lngLat bind:loadingState/>
