@@ -3,7 +3,7 @@
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 
-    import { onMount, getContext } from 'svelte';
+    import { onMount, afterUpdate, getContext } from 'svelte';
     import { mapbox, key } from '$lib/scripts/utils';
 
     import Device from 'svelte-device-info'

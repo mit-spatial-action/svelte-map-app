@@ -4,10 +4,9 @@
     import SearchGeocoder from '$lib/components/Map/Geocoders/SearchCombined.svelte';
     import ReverseGeocoder from '$lib/components/Map/Geocoders/Reverse.svelte';
     import SelectedGeometry from '$lib/components/Map/SelectedGeometry.svelte';
-    import Marker from '$lib/components/Map/Marker.svelte';
-    //import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
     import RippleLoader from '$lib/components/RippleLoader.svelte';
     import site_data from '$lib/config/instance.json';
+    import { getContext } from 'svelte';
 
     // @import '$lib/styles/_variables.scss';
 
@@ -50,6 +49,8 @@
     setContext(key, {
         getMap: () => map
     });
+
+    const selectedFeature = getContext('selectedFeature');
 
     function flyToLngLat(lngLat){
         map.flyTo({
@@ -107,15 +108,21 @@
             map.on('click', (e) => {
                 lngLat = e.lngLat;
 
-                var features = map.queryRenderedFeatures(e.point, { layers: ['evictions'] });
-                if (!features.length) {
-                    return;
-                }
                 if (typeof map.getLayer('selectedGeom') !== "undefined" ){         
                     map.removeLayer('selectedGeom')
                     map.removeSource('selectedGeom');   
                 }
+
+                var features = map.queryRenderedFeatures(e.point, { layers: ['evictions'] });
+                if (!features.length) {
+                    selectedFeature.update(selectedFeature => []);
+                    return;
+                }
+                
                 var feature = features[0];
+
+                selectedFeature.update(selectedFeature => [feature]);
+
                 map.addSource('selectedGeom', {
                     "type":"geojson",
                     "data": feature.toJSON()
@@ -136,7 +143,6 @@
                     }
                 });
 
-                
             })
             map.setFog({
                 range: [9,20],
@@ -172,8 +178,6 @@
         <SelectedGeometry bind:selected bind:lngLat bind:loadingState/>
     {/if}
 </div>
-
-
 
 <style>
     .non-interactive {
