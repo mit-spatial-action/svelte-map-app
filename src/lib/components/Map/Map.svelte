@@ -107,7 +107,7 @@
             map.on('click', (e) => {
                 lngLat = e.lngLat;
 
-                var features = map.queryRenderedFeatures(e.point, { layers: ['sample-evictions'] });
+                var features = map.queryRenderedFeatures(e.point, { layers: ['evictions'] });
                 if (!features.length) {
                     return;
                 }
@@ -122,14 +122,21 @@
                 });
                 map.addLayer({
                     "id": "selectedGeom",
-                    "type": "line",
+                    "type": "circle",
                     "source": "selectedGeom",
                     "paint": {
-                        "line-color": "yellow",
-                        "line-width": 8
+                        'circle-radius': [
+                            "interpolate",
+                            ["linear"],
+                            ["get", "evictions"],
+                            0, 2,
+                            400, 35],
+                        'circle-color': '#4223FF',
+                        'circle-opacity': 0.2
                     }
-        });
+                });
 
+                
             })
             map.setFog({
                 range: [9,20],
