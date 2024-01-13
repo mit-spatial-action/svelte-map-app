@@ -42,7 +42,7 @@
 </script>
 {#if loadState }
     {#if $selectedFeature.length == 0 }
-    <div>
+    <div class="home-panel">
         <div class="title has-text-dark is-size-1 has-text-centered">
             {title}
         </div>

@@ -91,10 +91,21 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
 //TODO: Revisit and recreate w/ BULMA defaults
 #left-panel{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  //flex-direction: column;
+  //align-items: center;
+  //justify-content: center;
+  padding: 30px;
 }
+
+.info-panel{
+  align-self: start;
+}
+
+.home-panel{
+  align-self: center !important;
+}
+
+
 
 #geocoder{  
   display: flex;
