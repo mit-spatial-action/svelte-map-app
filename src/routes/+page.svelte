@@ -13,16 +13,14 @@
 
     const selectedFeature = writable([]);
     setContext('selectedFeature', selectedFeature);
-    
 </script>
 
-<div class="container">
+<!-- <div class="container "> -->
     <div class="columns is-flex no-scroll is-vcentered is-centered">
-        <div class="column has-background-light is-half homepage shadow" id="left-panel">
+        <div class="column has-background-light homepage shadow" id="left-panel">
             <HomePanel title={site_data.title} subtitle={site_data.description} />
         </div>
-        <div class="column has-background-light homepage is-half">
+        <div class="column has-background-light homepage">
             <Map mapbox_token={data.mapbox_token} />
         </div>
     </div>
-</div>

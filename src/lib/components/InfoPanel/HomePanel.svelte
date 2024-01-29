@@ -39,10 +39,16 @@
             },
         ]
 
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("home-panel").style.marginLeft = "250px";
+    }
 </script>
 {#if loadState }
     {#if $selectedFeature.length == 0 }
     <div class="home-panel">
+        <button class="openbtn" on:click={openNav}>☰ Open Sidebar</button>  
+
         <div class="title has-text-dark is-size-1 has-text-centered">
             {title}
         </div>
