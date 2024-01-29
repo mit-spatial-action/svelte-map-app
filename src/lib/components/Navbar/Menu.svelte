@@ -5,17 +5,21 @@
       { label: 'Services', link: '#' },
       { label: 'Contact', link: '#' }
     ];
-    
+
     function closeNav() {
       document.getElementById("mySidebar").style.width = "0";
       document.getElementById("home-panel").style.marginLeft= "0";
     }
   </script>
+
   <div id="mySidebar" class="sidebar">
     <a href="javascript:void(0)" class="closebtn" on:click={closeNav}>×</a>
+    <a href="#">Map</a>
+    <a href="#">Eviction Statistics</a>
+    <a href="#">See a Random Evictor</a>
+    <a href="#">Gallery</a>
+    <a href="#">Links & Info</a>
     <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
     <a href="#">Contact</a>
   </div>
   <!--<aside class="menu">

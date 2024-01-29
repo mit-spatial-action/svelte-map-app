@@ -13,10 +13,18 @@
 
     const selectedFeature = writable([]);
     setContext('selectedFeature', selectedFeature);
+
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("home-panel").style.marginLeft = "250px";
+    }
 </script>
 
 <!-- <div class="container "> -->
     <div class="columns is-flex no-scroll is-vcentered is-centered">
+        <div class="column is-1 has-background-light is-flex-direction-column shadow is-justify-content-flex-start" id="collapsed-navbar">
+            <button class="openbtn" on:click={openNav}>☰</button>  
+        </div>
         <div class="column has-background-light homepage shadow" id="left-panel">
             <HomePanel title={site_data.title} subtitle={site_data.description} />
         </div>
