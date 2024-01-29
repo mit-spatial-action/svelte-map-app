@@ -7,15 +7,13 @@
     ];
   </script>
   
-  <div class="menu-container">
-    <aside class="menu">
-      <p class="menu-label">
-        General
-      </p>
-      <ul class="menu-list">
-        {#each menuItems as item}
-          <li><a href={item.link}>{item.label}</a></li>
-        {/each}
-      </ul>
-    </aside>
-  </div>
+  <aside class="menu">
+    <p class="menu-label">
+      General
+    </p>
+    <ul class="menu-list">
+      {#each menuItems as item}
+        <li><a href={item.link}>{item.label}</a></li>
+      {/each}
+    </ul>
+  </aside>

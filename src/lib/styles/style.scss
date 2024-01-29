@@ -50,10 +50,9 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
 }
 
 #map {
-  height: calc(100vh - (#{$navbar-height}));
-  position: fixed;
-  width: 60vw; //Consider changing this (relative to column width). 
-  top: calc(#{$navbar-height});
+  height: inherit;
+  width: 100%; //Consider changing this (relative to column width). 
+ // top: 0;
 }
 
 .homepage { 
@@ -110,4 +109,20 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
 #geocoder{  
   display: flex;
   justify-content: center;
+}
+
+.menu {
+  position: sticky;
+  display: inline-block;
+  vertical-align: top;
+  max-height: 100vh;
+  overflow-y: auto;
+  width: 200px;
+  top: 0;
+  bottom: 0;
+  padding: 30px;
+}
+
+.content {
+  display: inline-block;
 }
