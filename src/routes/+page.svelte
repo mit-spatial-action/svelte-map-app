@@ -15,14 +15,13 @@
     setContext('selectedFeature', selectedFeature);
 
     function openNav() {
-      document.getElementById("mySidebar").style.width = "250px";
-      document.getElementById("home-panel").style.marginLeft = "250px";
+      document.getElementById("mySidebar").style.cssText = "width: 250px; border-right: 2px solid #343434";
     }
 </script>
 
 <!-- <div class="container "> -->
-    <div class="columns is-flex no-scroll is-vcentered is-centered">
-        <div class="column is-1 has-background-light is-flex-direction-column shadow is-justify-content-flex-start" id="collapsed-navbar">
+    <div class="columns is-flex no-scroll is-vcentered">
+        <div class="column is-1 is-flex-direction-column shadow is-justify-content-flex-start" id="collapsed-navbar">
             <button class="openbtn" on:click={openNav}>☰</button>  
         </div>
         <div class="column has-background-light homepage shadow" id="left-panel">

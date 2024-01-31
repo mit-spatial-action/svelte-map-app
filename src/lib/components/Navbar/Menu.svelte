@@ -7,8 +7,7 @@
     ];
 
     function closeNav() {
-      document.getElementById("mySidebar").style.width = "0";
-      document.getElementById("home-panel").style.marginLeft= "0";
+      document.getElementById("mySidebar").style.cssText = "width: 0; border-right: 0.5px";
     }
   </script>
 

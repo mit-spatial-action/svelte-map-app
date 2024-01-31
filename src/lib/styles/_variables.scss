@@ -3,10 +3,14 @@ $success: #177E8A;
 $link: #f0a800;
 $danger: #d63088;
 $body-background-color: hsl(0, 0%, 21%);
+$sidebar: #F1F0F0;
+$border:  #343434;
 
 :export {
     primary: $primary;
     success: $success;
     link: $link;
     danger: $danger;
+    sidebar: $sidebar;
+    border: $border;
 }
