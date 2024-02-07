@@ -138,12 +138,13 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
 }
 
 .sidebar a {
-  padding: 8px 8px 8px 32px;
+  margin: 15px 30px 15px 32px;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  font-size: 16px;
+  color: #000000;
   display: block;
   transition: 0.3s;
+  border-bottom: 1px solid black;
 }
 
 .sidebar a:hover {
@@ -156,6 +157,7 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  color: #000000;
 }
 
 .openbtn {
