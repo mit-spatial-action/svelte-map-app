@@ -3,6 +3,7 @@
     import site_data from '$lib/config/instance.json';
     import Map from '$lib/components/Map/Map.svelte';
     import '$lib/styles/style.css';
+    import { key } from '$lib/scripts/utils';
 
 
     import { writable } from 'svelte/store';
@@ -13,6 +14,9 @@
 
     const selectedFeature = writable([]);
     setContext('selectedFeature', selectedFeature);
+
+    const getMap = writable([]);
+    setContext(key, getMap);
 
     function openNav() {
       document.getElementById("mySidebar").style.cssText = "width: 250px; border-right: 2px solid #343434";

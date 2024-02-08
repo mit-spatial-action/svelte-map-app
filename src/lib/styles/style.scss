@@ -92,9 +92,7 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   justify-content: center;
 }
 
-.info-panel{
-  align-self: start;
-}
+
 
 .home-panel{
   align-self: center !important;
@@ -158,6 +156,7 @@ $backgrounds: (solar: 'https://images.squarespace-cdn.com/content/v1/56fbfd2d370
   font-size: 36px;
   margin-left: 50px;
   color: #000000;
+  cursor: pointer;
 }
 
 .openbtn {

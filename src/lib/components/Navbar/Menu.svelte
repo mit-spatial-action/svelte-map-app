@@ -12,7 +12,7 @@
   </script>
 
   <div id="mySidebar" class="sidebar">
-    <p href="javascript:void(0)" class="closebtn" on:click={closeNav}>×</p>
+    <p href="javascript:void(0)" class="closebtn" on:click={closeNav}>x</p>
     <a href="#">Map</a>
     <a href="#">Eviction Statistics</a>
     <a href="#">See a Random Evictor</a>

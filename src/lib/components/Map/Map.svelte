@@ -26,7 +26,7 @@
     export let initLngLat = site_data.map.init.lngLat;
     initLngLat = new mapbox.LngLat(initLngLat[0], initLngLat[1])
     export let initZoom = site_data.map.init.zoom;
-    export let initZoomDur  = 3000;
+    export let initZoomDur  = 500; //change back to 3000 after dev
     
     export let maxBounds = [
         [-179,19], 

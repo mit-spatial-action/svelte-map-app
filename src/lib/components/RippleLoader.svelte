@@ -9,7 +9,7 @@
         "duration": 500,
         "distance": 150
     };
-	export let denom = 4;
+	export let denom = 4; 
     const steps = Array.from(Array(denom - 1), (_, i) => i + 1)
 
 </script>
