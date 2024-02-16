@@ -1,16 +1,31 @@
 <script>
-    import { onMount } from 'svelte';
+    import { afterUpdate, onMount } from 'svelte';
     import SearchBar from '$lib/components/SearchBar.svelte';
     import InfoPanel from '$lib/components/InfoPanel/InfoPanel.svelte';
+    import { remountSearchbar } from '$lib/scripts/stores.js';
+
      /** @type {import('./$types').PageData} */
-     import { getContext } from 'svelte';
+     import { getContext, setContext } from 'svelte';
 
     export let title = "Title";
     export let subtitle = "Longer description";
     let loadState = false;
-    onMount(() => loadState = true);
+
+    onMount(() => {
+        loadState = true;
+    });
 
     const selectedFeature = getContext('selectedFeature');
+
+    afterUpdate(() => {
+        if (document.getElementById('geocoder')){
+            let length = document.getElementById('geocoder').children.length;
+
+            if (length == 0){
+                remountSearchbar.update((n) => n+1);
+            }
+       }
+    })
 
     function handleSearch(event) {
         const searchTerm = event.detail;
@@ -38,6 +53,7 @@
                 desc: "Gallery",
             },
         ]
+
 </script>
 {#if loadState }
     {#if $selectedFeature.length == 0 }
@@ -50,7 +66,7 @@
         </div>
         <div class="centered">
             {#key $selectedFeature}
-                 <SearchBar on:search={handleSearch} />
+                 <SearchBar key={$selectedFeature} on:search={handleSearch} />
             {/key}
         </div>
     </div>
@@ -59,6 +75,7 @@
        <InfoPanel/>
     {/if}
 {/if}
+
 
 
 

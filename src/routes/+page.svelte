@@ -18,6 +18,9 @@
     const getMap = writable([]);
     setContext(key, getMap);
 
+    const remountSearchbar = writable([]);
+    setContext('remountSearchbar', remountSearchbar);
+
     function openNav() {
       document.getElementById("mySidebar").style.cssText = "width: 250px; border-right: 2px solid #343434";
     }

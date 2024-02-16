@@ -12,9 +12,9 @@
     const { getMap } = getContext(key);
     const map = getMap()
 
-    export let gcResult;
-    export let lngLat;
-    export let selected;
+    //export let gcResult;
+    //export let lngLat;
+    //export let selected;
 
     let coords;
 
@@ -30,4 +30,5 @@
     onMount(()=>{
         document.getElementById('geocoder').appendChild(SearchGeocoder.onAdd(map));
     });
+    
 </script>

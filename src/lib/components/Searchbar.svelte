@@ -1,7 +1,7 @@
 <script>
     //import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
    //import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-   import { getContext } from 'svelte';
+   import { getContext, onDestroy, onMount} from 'svelte';
 
     let searchText = '';
 
@@ -12,6 +12,15 @@
     function handleSearch() {
         dispatch('search', searchTerm);
      }
+
+     onDestroy(() => {
+        console.log("destroyed");
+     });
+
+     onMount(()=>{
+        console.log("mounted");
+     });
+
 
   </script>
 

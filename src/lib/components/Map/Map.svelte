@@ -16,6 +16,8 @@
    // import Evictions from '$lib/config/SampleEvictions.geojson';
 
     import Device from 'svelte-device-info';
+    import { remountSearchbar } from '$lib/scripts/stores.js';
+
     let mobile;
 
     export let mapbox_token;
@@ -48,6 +50,12 @@
 
     setContext(key, {
         getMap: () => map
+    });
+
+    //Get remount searchbar value from store
+    let remountSearchbar_value; 
+    remountSearchbar.subscribe((value) =>{
+        remountSearchbar_value = value;
     });
 
     const selectedFeature = getContext('selectedFeature');
@@ -174,7 +182,9 @@
     {#if map}
         <RippleLoader bind:loadingState />
         <ReverseGeocoder bind:lngLat bind:gcResult />
-        <SearchGeocoder bind:lngLat bind:gcResult bind:selected />
+        {#key remountSearchbar_value}
+            <SearchGeocoder bind:lngLat bind:gcResult bind:selected />
+        {/key}
         <SelectedGeometry bind:selected bind:lngLat bind:loadingState/>
     {/if}
 </div>

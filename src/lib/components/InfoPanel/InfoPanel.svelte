@@ -1,12 +1,14 @@
 <script>
-    import { onMount } from 'svelte';
+    import { afterUpdate, onMount } from 'svelte';
      /** @type {import('./$types').PageData} */
      import { getContext } from 'svelte';
      import { mapbox, key } from '$lib/scripts/utils';
 
 
     let loadState = false;
-    onMount(() => loadState = true);
+    onMount(() => {
+        loadState = true;        
+    });
 
     const selectedFeature = getContext('selectedFeature');
     
@@ -15,8 +17,8 @@
 
     function clearState() {
         selectedFeature.update(selectedFeature => []); 
-        map.removeLayer('selectedGeom');
-        map.removeSource('selectedGeom');   
+        //map.removeLayer('selectedGeom');
+        //map.removeSource('selectedGeom');   
     }
 
 </script>
@@ -39,6 +41,6 @@
         Eviction Rank: { $selectedFeature[0].properties.eviction_rank } <br/>
         Evictions: {$selectedFeature[0].properties.evictions} <br/>
         Address: { $selectedFeature[0].properties.place_name} <br/>
-    </div>
+    </div> 
     </div>
 {/if}
